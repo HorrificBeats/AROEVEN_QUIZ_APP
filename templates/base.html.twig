@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body style='background-color:#98B1E4'>
+		<nav>
+			{% if app.user %}
+				<div style="background-color:white; float:right">
+					Top of the morning to you,
+					<b>
+						<i>{{ app.user.username }}</b>
+					</i>
+					!
+				</div>
+				<br>
+			{% endif %}
+			<ul class="horizontal mb-0" style="background-color: #E3E129">
+				<li>
+					<a class="active" href="{{ path('home') }}">Home</a>
+				</li>
+				<li class="rightli">
+					<a href="{{ path('tutorial') }}">TUTORIAL</a>
+				</li>
+				<li class="rightli">
+					<a href="{{ path('modules_page') }}">MODULES</a>
+				</li>
+				{% if app.user %}
+					<li class="rightli">
+						<a href="{{ path('app_logout') }}">LOGOUT</a>
+					</li>
+				{% else %}
+					<li class="rightli">
+						<a href="{{ path('app_login') }}">LOGIN</a>
+					</li>
+				{% endif %}
+			</ul>
+		</nav>
+		{% block body %}{% endblock %}
+		{% block javascripts %}{% endblock %}
+	</body>
 </html>
