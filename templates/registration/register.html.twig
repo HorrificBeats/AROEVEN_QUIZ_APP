@@ -9,30 +9,35 @@
 	{% endfor %}
 
 	<div>
-		<div style='float:left; background-color: #CACBD3;  width:60%'>
+		<div style='float:left; background-color: #CACBD3;  width:56%; padding:15px'>
 			<h1>WELCOME!</h1>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
 		</div>
 
 		{% if not app.user %}
-			<div style='float:right; background-color: #CADBD9; width:40%'>
+			<div style='float:right; background-color: #CADBD9; width:37%; padding:15px;'>
 				<h2>SIGN UP HERE</h2>
-
+				
 				{{ form_start(registrationForm) }}
+				{% block form_label_errors %}{% endblock %}
+
 				{{ form_row(registrationForm.username) }}
-				{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+				{{ form_row(registrationForm.plainPassword) }}
+				{{ form_row(registrationForm.birthdate) }}
 				{{ form_row(registrationForm.agreeTerms) }}
 
+				
 				<button type="submit" class="btn">Register</button>
 				{{ form_end(registrationForm) }}
+
 			</div>
 		{% endif %}
 	</div>
 	<div>
 		{% if app.user %}
-			<a href='{{ path('tutorial') }}'><button>GO TO TUTORIAL</button></a>
+			<a href='{{ path('tutorial') }}'>
+				<button>GO TO TUTORIAL</button>
+			</a>
 		{% endif %}
 	</div>
 {% endblock %}

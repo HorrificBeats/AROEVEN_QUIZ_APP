@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Module;
+use App\Entity\Slide;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,9 +33,14 @@ class ModuleController extends AbstractController
             ->getRepository(Module::class)
             ->findAll();
 
+        /* $slides = $this->getDoctrine()
+            ->getRepository(Slide::class)
+            ->findAll(); */
+
         return $this->render('module/module.html.twig', [
             'controller_name' => 'ModuleController',
             'modules' => $modules,
+/*             'slides' => $slides, */
         ]);
     }
 }

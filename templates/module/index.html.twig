@@ -17,17 +17,6 @@
 		}
 	</style>
 
-	{# <div class="example-wrapper">
-		    <h1>Hello {{ controller_name }}! ✅</h1>
-		
-		    This friendly message is coming from:
-		    <ul>
-		        <li>Your controller at <code><a href="{{ '/Users/Horrific/Google Drive/A.F.P.A. WebDev/_♞PROIECT FINAL/1.MY_SYMFONY_APP/src/Controller/ModuleController.php'|file_link(0) }}">src/Controller/ModuleController.php</a></code></li>
-		        <li>Your template at <code><a href="{{ '/Users/Horrific/Google Drive/A.F.P.A. WebDev/_♞PROIECT FINAL/1.MY_SYMFONY_APP/templates/module/index.html.twig'|file_link(0) }}">templates/module/index.html.twig</a></code></li>
-		    </ul>
-		</div> #}
-	
-
 	<ul>
 		{% for module in modules %}
 			<a href="{{ path('module', {'id' : module.id})}}">
