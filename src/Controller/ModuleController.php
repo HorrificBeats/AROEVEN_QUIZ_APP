@@ -27,20 +27,23 @@ class ModuleController extends AbstractController
     /**
      * @Route("/module/{id}", name="module")
      */
-    public function oneModule()
+    public function oneModule($id)
     {
-        $modules = $this->getDoctrine()
+        $module = $this->getDoctrine()
             ->getRepository(Module::class)
-            ->findAll();
+            ->findAll($id);
 
-        /* $slides = $this->getDoctrine()
+        $slides = $this->getDoctrine()
             ->getRepository(Slide::class)
-            ->findAll(); */
+            ->findBy([
+            "id_module" => $id    
+            ]);
 
-        return $this->render('module/module.html.twig', [
+        return $this->render('module/module.html.twig', array(
             'controller_name' => 'ModuleController',
-            'modules' => $modules,
-/*             'slides' => $slides, */
-        ]);
+            'module' => $module,
+            'slides' => $slides,
+            'id' =>$id
+        ));
     }
 }

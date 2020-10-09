@@ -5,13 +5,23 @@
 
 {% block body %}
 
-<h1><i>{{modules.0.title}}</i></h1>
-<h2>SLIDE SUCKA </h2>
+	<h1>
+		<i>{{module[id-1].title}}</i>
+        {# Cum pot inlocui "0" cu ID-ul din URL? #}
+	</h1>
+	<h2>SLIDES SUCKA
+	</h2>
 
-{# {% for slide in slides %}
+	{% for slide in slides %}
+        <h3>{{slide.getSlideNumber}}</h3>
+        {# De ce pot afisa slide.content & id, dar nu alte proprietati  #}
+		{# <p style='background-color: white; padding:5px'> #}{{slide.content}}{# </p> #}
+        <button> NEXT SLIDE</button>
+        <br>
 
-<div>{{slide.content}}</div>
-
-{% endfor %} #}
+	{% endfor %}
 	
+
+    
+
 {% endblock %}
