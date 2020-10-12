@@ -14,6 +14,7 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
 		</div>
 
+		{# SIGN UP Shows Only for non-loggedIn users #}
 		{% if not app.user %}
 			<div style='float:right; background-color: #CADBD9; width:37%; padding:15px;'>
 				<h2>SIGN UP HERE</h2>
@@ -34,6 +35,7 @@
 		{% endif %}
 	</div>
 	<div>
+		{# 1/2 Din protectie; cealalta jumatate este in CONTROLLER #}
 		{% if app.user %}
 			<a href='{{ path('tutorial') }}'>
 				<button>GO TO TUTORIAL</button>

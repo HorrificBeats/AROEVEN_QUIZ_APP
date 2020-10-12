@@ -17,27 +17,46 @@
 		}
 	</style>
 
-	{# <div class="example-wrapper">
-	    <h1>Hello {{ controller_name }}! ✅</h1>
-	
-	    This friendly message is coming from:
-	    <ul>
-	        <li>Your controller at <code><a href="{{ '/Users/Horrific/Google Drive/A.F.P.A. WebDev/_♞PROIECT FINAL/1.MY_SYMFONY_APP/src/Controller/QuizController.php'|file_link(0) }}">src/Controller/QuizController.php</a></code></li>
-	        <li>Your template at <code><a href="{{ '/Users/Horrific/Google Drive/A.F.P.A. WebDev/_♞PROIECT FINAL/1.MY_SYMFONY_APP/templates/quiz/index.html.twig'|file_link(0) }}">templates/quiz/index.html.twig</a></code></li>
-	    </ul>
-	</div> #}
-	<h1>QUIZ PRE</h1>
-	<span>0% </span><progress id="file" value="10" max="100"></progress><span>100% </span>
-<h2>#1 Lorem ipsum dolor sit amet, consectetur adipiscing elit?</h2>
-<ol>
-	<li><input type='radio'>Lorem</li>
-	<li><input type='radio'>Ipsum</li>
-	<li><input type='radio'>Dolor</li>
-	<li><input type='radio'>Sit</li>
-	<li><input type='radio'>Amet</li>
-</ol>
+	{# TITLE changes for each quizType #}
+	{% if id == 1 %}
+		<h1>QUIZ
+			<i>PRE</i>
+		</h1>
+	{% elseif id == 2 %}
+		<h1>QUIZ
+			<i>POST</i>
+		</h1>
+	{% endif %}
 
-<button>PREVIOUS</button>
-<button>NEXT</button>
-<a href="{{ path('modules_page') }}"><button>Finish</button></a>
-{% endblock %}
+	<div style='background-color: green'>
+		{% for question in questions %}
+			{# QUESTIONS LOOP #}
+			<h3></h3>
+			<p style='background-color: pink; padding:5px'>{{question.getQNumber}}.
+				{{question.content}}
+				{# </p> #}
+				<div>
+					{% for answer in answers %}
+						{# ANSWERS LOOP #}
+						<p><input type='radio'>
+							{{answer.content}}</p>
+					{% endfor %}
+				</div>
+				<button>PREVIOUS</button>
+				<button>NEXT</button>
+
+			{% endfor %}
+
+
+			{% if id == 1 %}
+				<a href="{{ path('module', {'id' : 1}) }}">
+					<button>Finish</button>
+				</a>
+			{% elseif id == 2 %}
+				<a href="{{ path('modules_page')}}">
+					<button>Back to MODULES</button>
+				</a>
+			{% endif %}
+
+		</div>
+	{% endblock %}

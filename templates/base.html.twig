@@ -3,13 +3,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}
+				Welcome!
 			{% endblock %}
 		</title>
 		{% block stylesheets %}{% endblock %}
 	</head>
 	<body style='background-color:#98B1E4'>
 		<nav>
+			{# IF user is logged in #}
 			{% if app.user %}
 				<div style="background-color:white; float:right">
 					Top of the morning to you,
@@ -20,9 +22,9 @@
 				</div>
 				<br>
 			{% endif %}
-			<ul class="horizontal mb-0" style="background-color: #E3E129">
+			<ul class="horizontal mb-0" style="background-color: #E3F239">
 				<li>
-					<a class="active" href="{{ path('home') }}">Home</a>
+					<a {# class="active" #} href="{{ path('home') }}">Home</a>
 				</li>
 				<li class="rightli">
 					<a href="{{ path('tutorial') }}">TUTORIAL</a>
@@ -30,17 +32,69 @@
 				<li class="rightli">
 					<a href="{{ path('modules_page') }}">MODULES</a>
 				</li>
+
+				{# ONLY if user exists #}
 				{% if app.user %}
 					<li class="rightli">
-						<a href="{{ path('app_logout') }}">LOGOUT</a>
+						<a style="color:red" href="{{ path('app_logout') }}">LOGOUT</a>
 					</li>
 				{% else %}
 					<li class="rightli">
-						<a href="{{ path('app_login') }}">LOGIN</a>
+						<a style="color:blue" href="{{ path('app_login') }}">LOGIN</a>
+					</li>
+				{% endif %}
+
+				{# ONLY if user == ADMIN #}
+				{% if is_granted('ROLE_ADMIN') %}
+					<li class="rightli">
+						<a style='background-color: black; color:white; padding:0px 4px 0px 4px;' href="{{ path('admin_panel') }}">ADMIN</a>
 					</li>
 				{% endif %}
 			</ul>
 		</nav>
+		<sidemenu>
+			{# DOAR DACA SUNT IN ADMIN_PANEL #}
+			{% if app.request.attributes.get('_route') starts with 'admin_' %}
+				<div style='float: left'>
+					<a href='{{ path('admin_results') }}' 
+					{# MOVING ACTIVE CLASS FOR CLICKED BUTTON TO MARK SECTION #}
+					{% if app.request.attributes.get('_route') == 'admin_results' %} 
+					class='active'
+					{% endif %} > 
+						• RESULTS
+					</a>
+					<br>
+					<a href='{{ path('admin_modules') }}' {% if app.request.attributes.get('_route') == 'admin_modules' %} 
+					class='active'
+					{% endif %}>
+						• MODULES
+					</a>
+					<br>
+					<a href='{{ path('admin_quizzes') }}'>
+						• QUIZ
+					</a>
+					<br>
+					<a href='{{ path('admin_results') }}'>
+						Add MODULE
+					</a>
+					<br>
+					<a href='{{ path('admin_results') }}'>
+						Add QUIZ
+					</a>
+				</div>
+
+				<br>
+				<br>
+				<br>
+
+			{% endif %}
+		</sidemenu>
+		<style>
+			.active {
+				background-color: #680039;
+				color: white;
+			}
+		</style>
 		{% block body %}{% endblock %}
 		{% block javascripts %}{% endblock %}
 	</body>

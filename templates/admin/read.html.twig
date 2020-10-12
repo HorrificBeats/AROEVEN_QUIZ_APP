@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+
+	{# RESULTS TABLE #}
+	{% if app.request.attributes.get('_route') == 'admin_results' %}
+		<table>
+			<tr>
+				<th>User</th>
+				<th>Quiz</th>
+				<th>Module</th>
+				<th>Quiz Type</th>
+				<th>Question</th>
+				<th>Answer</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			{% for usr_answ in userAnswer %}
+
+				<tr>
+					<td>{{usr_answ.user.username}}</td>
+					<td>{{usr_answ.quiz.id}}</td>
+					<td>{{usr_answ.quiz.module.title}}</td>
+					<td>{{usr_answ.getQuizType}}</td>
+					<td>{{usr_answ.question.content}}</td>
+					<td>{{usr_answ.answer.content}}</td>
+					<td>
+						<a href='#'>
+							🖋
+						</a>
+					</td>
+					<td>
+						<a href='#'>
+							🗑
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+
+	{# MODULES TABLE #}
+	{% if app.request.attributes.get('_route') ==  'admin_modules' %}
+		<table>
+			<tr>
+				<th>Modules</th>
+				<th>Slides</th>
+				<th>Slide number</th>
+			</tr>
+			{% for module in modules %}
+
+				<tr>
+					<td>{{module.title}}</td>
+					{# <td>{{module.getSlides}}</td> #}
+					{# 					<td>{{usr_mdl.quiz.module.title}}</td> #}
+					<td>
+						<a href='#'>
+							🖋
+						</a>
+					</td>
+					<td>
+						<a href='#'>
+							🗑
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+
+	{# QUIZZEZ TABLE #}
+	{% if app.request.attributes.get('_route') == 'admin_quizzes' %}
+		<table>
+			<tr>
+				<th>Quiz</th>
+				<th>Module</th>
+				<th>Question</th>
+				<th>Answer</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			{% for quiz in quizzes %}
+
+				<tr>
+					<td>{{quiz.id}}</td>
+					<td>{{quiz.module.title}}</td>
+					<td>{{quiz.getQuestions}}</td>
+{# 					<td>{{quiz.answer.content}}</td> #}
+					<td>
+						<a href='#'>
+							🖋
+						</a>
+					</td>
+					<td>
+						<a href='#'>
+							🗑
+						</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+
+
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 90%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+
+{% endblock %}

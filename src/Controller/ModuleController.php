@@ -14,6 +14,9 @@ class ModuleController extends AbstractController
      */
     public function allModules()
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        /* DENYING ACCESS */
+
         $modules = $this->getDoctrine()
             ->getRepository(Module::class)
             ->findAll();
