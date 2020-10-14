@@ -4,6 +4,86 @@
 {% endblock %}
 
 {% block body %}
+	<div style='width: 75%; float:right; background-color:grey; padding: 15px;'>
+		<div style='margin-right:20px; padding: 5px;'>
+			<h2>
+				Modules
+			</h2>
+			{% for module in modules %}
+				<a href="{{ path('module', {'id' : module.id})}}">
+					{# CUM FUNCTIONEAZA MAGIA ASTA NEAGRA??? #}
+
+					{# Culoare dinamica in functie de ID #}
+						{% if module.id is odd %}
+							<div style='background-color:red; float:left; width:100px; height:100px; text-align:center; margin-left: 10px; border: solid black;'> {{module.title}}
+                            <br>
+							<br>
+							<a href='#'>
+								<button>
+									DELETE
+								</button>
+							</a>
+						</div>
+					{% else %}
+						<div style='background-color:white; float:left; width:100px; height:100px; text-align:center; margin-left: 10px; border: solid black;'>
+							{{module.title}}
+                            <br>
+							<br>
+							<a href='#'>
+								<button>
+									DELETE
+								</button>
+							</a>
+						</div>
+					{% endif %}
+				</a>
+			{% endfor %}
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<hr>
+
+		<div style='margin-right:20px; padding: 5px; '>
+			<h2>
+				Quizzes
+			</h2>
+			{% for quiz in quizzes %}
+				<a href={# "{{ path('quiz', {'quiz' : quiz.id})}}" #}>
+					{# CUM FUNCTIONEAZA MAGIA ASTA NEAGRA??? #}
+
+					{# Culoare dinamica in functie de ID #}
+						{% if quiz.id is odd %}
+							<div style='color: yellow ;background-color: aqua; float:left; width:100px; height:100px; text-align:center; margin-left: 10px; border: solid black;'> QUIZ
+							{{quiz.id}}
+							<br>
+							<br>
+							<a href='#'>
+								<button>
+									DELETE
+								</button>
+							</a>
+						</div>
+					{% else %}
+						<div style='color:white; background-color:lime; float:left; width:100px; height:100px; text-align:center; margin-left: 10px; border: solid black;'>
+							QUIZ
+							{{quiz.id}}
+							<br>
+							<br>
+							<a href='#'>
+								<button>
+									DELETE
+								</button>
+							</a>
+						</div>
+					{% endif %}
+				</a>
+			{% endfor %}
+		</div>
+	</div>
 
 
 {% endblock %}

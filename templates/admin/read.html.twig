@@ -5,23 +5,24 @@
 
 {% block body %}
 
+
 	{# RESULTS TABLE #}
 	{% if app.request.attributes.get('_route') == 'admin_results' %}
 		<table>
 			<tr>
-				<th>User</th>
-				<th>Quiz</th>
-				<th>Module</th>
-				<th>Quiz Type</th>
-				<th>Question</th>
-				<th>Answer</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<th>USER</th>
+				<th>QUIZ</th>
+				<th>MODULE</th>
+				<th>QUIZ_Type</th>
+				<th>QUESTION</th>
+				<th>ANSWER</th>
+				<th>EDIT</th>
+				<th>DELETE</th>
 			</tr>
 			{% for usr_answ in userAnswer %}
 
-				<tr>
-					<td>{{usr_answ.user.username}}</td>
+				<tr class='resultsAll'>
+					<td><b>{{usr_answ.user.username}}</b></td>
 					<td>{{usr_answ.quiz.id}}</td>
 					<td>{{usr_answ.quiz.module.title}}</td>
 					<td>{{usr_answ.getQuizType}}</td>
@@ -45,17 +46,24 @@
 	{# MODULES TABLE #}
 	{% if app.request.attributes.get('_route') ==  'admin_modules' %}
 		<table>
-			<tr>
-				<th>Modules</th>
+			<tr class='modulesAll'>
+				<th>MODULES</th>
+				<th>N.S.</th>
 				<th>Slides</th>
-				<th>Slide number</th>
+				<th>Content Type</th>
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
-			{% for module in modules %}
-
+			{# Trec prin SLIDE ca sa ajung la MODULE #}
+			{% for slide in slides %}
 				<tr>
-					<td>{{module.title}}</td>
-					{# <td>{{module.getSlides}}</td> #}
-					{# 					<td>{{usr_mdl.quiz.module.title}}</td> #}
+					<td>{{slide.getIdModule.title}}</td>
+					<td>{{slide.getSlideNumber}}</td>
+					<td>{{slide.content}}</td>
+					<td>
+						<i>{{slide.getContentType}}</i>
+					</td>
+					{# <td>{{usr_mdl.quiz.module.title}}</td> #}
 					<td>
 						<a href='#'>
 							🖋
@@ -75,20 +83,25 @@
 	{% if app.request.attributes.get('_route') == 'admin_quizzes' %}
 		<table>
 			<tr>
-				<th>Quiz</th>
-				<th>Module</th>
+				<th>Quiz id</th>
+				<th>Q_N</th>
 				<th>Question</th>
 				<th>Answer</th>
+				<th>Answer Number</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
-			{% for quiz in quizzes %}
+			{% for answer in answers %}
 
-				<tr>
-					<td>{{quiz.id}}</td>
-					<td>{{quiz.module.title}}</td>
-					<td>{{quiz.getQuestions}}</td>
-{# 					<td>{{quiz.answer.content}}</td> #}
+				<tr class='quizzesAll'>
+					<td>
+						<b>{{answer.getQuestion.getQuiz.id}}</b>
+					</td>
+					<td>{{answer.getQuestion.getQNumber}}</td>
+					<td>{{answer.getQuestion.content}}</td>
+					<td>{{answer.getAnswerNumber}}</td>
+					
+					<td>{{answer.content}}</td>
 					<td>
 						<a href='#'>
 							🖋
@@ -109,21 +122,49 @@
 		table {
 			font-family: arial, sans-serif;
 			border-collapse: collapse;
-			width: 90%;
-			margin-left: auto;
+			width: 80%;
+			margin-left: 15%;
 			margin-right: auto;
 		}
-
 		td,
 		th {
-			border: 1px solid #dddddd;
-			text-align: left;
-			padding: 8px;
+			border: 2px solid black;
+			text-align: justify;
+			padding: 6px;
 		}
 
-		tr:nth-child(even) {
-			background-color: #dddddd;
+
+		{# TABLE GROUPINGS #}
+		{# RESULTS #}
+		.resultsAll:nth-child(4n+2) {
+			background-color: #e49600;
 		}
+		.resultsAll:nth-child(4n+3) {
+			background-color: #e49600;
+		}
+
+
+		{# MODULES #}
+		{# Cum pot sa colorez diferite pt. fiecare valoare din MODULE.TITLE ?? #}
+		{# Vezi TRELLO #}
+
+		{# QUIZ #}
+		.quizzesAll:nth-child(10n + 2) {
+			background-color: #ffffff;
+		}
+		.quizzesAll:nth-child(10n + 3) {
+			background-color: #ffffff;
+		}
+		.quizzesAll:nth-child(10n + 4) {
+			background-color: #ffffff;
+		}
+		.quizzesAll:nth-child(10n + 5) {
+			background-color: #ffffff;
+		}
+		.quizzesAll:nth-child(10n + 6) {
+			background-color: #ffffff;
+		}
+		
 	</style>
 
 {% endblock %}

@@ -10,35 +10,50 @@
 		<i>{{module[id-1].title}}</i>
 	</h1>
 
-	<h2>SLIDES SUCKA</h2>
-
 	{# Each MODULE has different colors  #}
-	{% if id is even %}
-		<div style='background-color: #fff5eb'>
+	{% if id is odd %}
+		<div
+			style='background-color: #ff7373'>
+			{# MODULE A #}
 			{% for slide in slides %}
-				<h3>{{slide.getSlideNumber}}</h3>
-				{{slide.content|raw}} {# Ca sa nu adauge ghilimele degeaba #}
-				<br>
-				<button>
-					NEXT SLIDE</button>
-				<br>
+				<div id='slide{{slide.id}}' class='slide' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
+					<h3 style='text-align:center'>[
+						{{slide.getSlideNumber}}
+						]</h3>
+					{{slide.content|raw}}
+					{# Ca sa nu adauge ghilimele degeaba #}
+					<br>
+					<button onclick='showSlide("slide{{slide.id+1}}")'>
+						NEXT SLIDE
+					</button>
+					<br>
+				</div>
 			{% endfor %}
 		</div>
 	{% else %}
-		<div style='background-color: #ff7373'>
+		<div
+			style='background-color: #fff5eb'>
+			{# MODULE B #}
 			{% for slide in slides %}
-				<h3 style='text-align:center'>[ {{slide.getSlideNumber}} ]</h3>
-				{{slide.content|raw}} {# Ca sa nu adauge ghilimele degeaba #}
-				<br>
-				<button>
-					NEXT SLIDE</button>
-				<br>
+				<div id='slide{{slide.id}}' class='slide' {{ slide.id == 6 ? 'style="display:"' : 'style="display:none"' }}>
+					<h3 style='text-align:center'>[
+						{{slide.getSlideNumber}}
+						]</h3>
+					{{slide.content|raw}}
+					{# Ca sa nu adauge ghilimele degeaba #}
+					<br>
+					<button onclick='showSlide("slide{{slide.id+1}}")'>
+						NEXT SLIDE
+					</button>
+					<br>
+				</div>
 			{% endfor %}
 		</div>
 	{% endif %}
 
 
 	{# NAVIGATION TO 2nd MODULE & 2nd QUIZ #}
+	<hr>
 	{% if module[id-1] == module[0] %}
 		{# IF I'm already on the 1st Module, I'll go to the next one #}
 		<a href="{{ path('module', {'id' : 2}) }}">
