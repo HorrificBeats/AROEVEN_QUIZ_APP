@@ -13,4 +13,7 @@ return [
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Sonata\Exporter\Bridge\Symfony\SonataExporterSymfonyBundle::class => ['all' => true],
+    /* Custom Libraries */
+    Craue\FormFlowBundle\CraueFormFlowBundle::class => ['all' => true],
+    Yectep\PhpSpreadsheetBundle\PhpSpreadsheetBundle::class => ['all' => true]
 ];

@@ -25,7 +25,7 @@ class UserAnswer
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $quiz_type;
+    private $m;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="userAnswers")

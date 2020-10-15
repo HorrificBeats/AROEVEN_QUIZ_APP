@@ -48,10 +48,11 @@ class AdminController extends AbstractController
             ->getRepository(Quiz::class)
             ->findAll();
 
+        $message = '';
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
             'modules' => $modules,
-            'quizzes' => $quizzes
+            'quizzes' => $quizzes,
         ]);
     }
 
@@ -61,7 +62,7 @@ class AdminController extends AbstractController
      */
     private $entityManager;
 
-   /*  public function __construct(EntityManagerInterface $entityManager)
+    /*  public function __construct(EntityManagerInterface $entityManager)
     {
 
         $this->entityManager = $entityManager;
@@ -69,17 +70,17 @@ class AdminController extends AbstractController
  */
 
 
-   /*  private function getData()
+    /*  private function getData()
     {
         /**
          * @var $user_answer UserAnswer[]
          */
-        //$list = [];
-        //$user_answer = $this->entityManager
-            //->getRepository(UserAnswer::class)
-            //->findAll();
+    //$list = [];
+    //$user_answer = $this->entityManager
+    //->getRepository(UserAnswer::class)
+    //->findAll();
 
-        /* foreach ($user_answer as $usr_answ) {
+    /* foreach ($user_answer as $usr_answ) {
             $list[] = [
                 $usr_answ->getId(),
                 $usr_answ->getQuizType(),
@@ -87,7 +88,7 @@ class AdminController extends AbstractController
                 $usr_answ->getAnswer()
             ];
         } */
-        /* return $list; */
+    /* return $list; */
     /* }  */
 
     /**

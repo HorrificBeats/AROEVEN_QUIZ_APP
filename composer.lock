@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5193629c2357e10a55c87e71e77569bb",
+    "content-hash": "16fb3ddcc610f6792f588f76ea8308d1",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -74,6 +74,79 @@
                 }
             ],
             "time": "2020-08-25T05:50:16+00:00"
+        },
+        {
+            "name": "craue/formflow-bundle",
+            "version": "3.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/craue/CraueFormFlowBundle.git",
+                "reference": "55d79bf9325403f844244f26ff48ba6dba8be9c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/55d79bf9325403f844244f26ff48ba6dba8be9c1",
+                "reference": "55d79bf9325403f844244f26ff48ba6dba8be9c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.0",
+                "symfony/config": "~3.4|~4.2|~5.0",
+                "symfony/dependency-injection": "~3.4|~4.2|~5.0",
+                "symfony/event-dispatcher": "~3.4|~4.2|~5.0",
+                "symfony/form": "~3.4|~4.2|~5.0",
+                "symfony/http-foundation": "~3.4|~4.2|~5.0",
+                "symfony/http-kernel": "~3.4|~4.2|~5.0",
+                "symfony/options-resolver": "~3.4|~4.2|~5.0",
+                "symfony/security-core": "~3.4|~4.2|~5.0",
+                "symfony/translation": "~3.4|~4.2|~5.0",
+                "symfony/validator": "~3.4|~4.2|~5.0",
+                "symfony/yaml": "~3.4|~4.2|~5.0"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.7",
+                "doctrine/doctrine-bundle": "~1.10|~2.0",
+                "phpunit/phpunit": "^6.5.13|^7.5.1",
+                "symfony/phpunit-bridge": "~5.0",
+                "symfony/symfony": "~3.4|~4.2|~5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Craue\\FormFlowBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Raue",
+                    "email": "christian.raue@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/craue/CraueFormFlowBundle/contributors"
+                }
+            ],
+            "description": "Multi-step forms for your Symfony project.",
+            "homepage": "https://github.com/craue/CraueFormFlowBundle",
+            "keywords": [
+                "form",
+                "step",
+                "symfony",
+                "wizard"
+            ],
+            "time": "2020-05-07T08:50:23+00:00"
         },
         {
             "name": "doctrine/annotations",
