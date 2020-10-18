@@ -9,6 +9,7 @@ use App\Entity\Module;
 use App\Entity\Quiz;
 use App\Entity\Answer;
 use App\Entity\Slide;
+use App\Entity\UserModule;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

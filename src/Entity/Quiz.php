@@ -119,4 +119,10 @@ class Quiz
 
         return $this;
     }
+
+    public function __toString()
+    {
+        // Evrikaaaa
+        return strval($this->getId());
+    }
 }
