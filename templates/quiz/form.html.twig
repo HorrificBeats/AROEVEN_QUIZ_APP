@@ -1,9 +1,22 @@
 {% extends 'base.html.twig' %}
-{% block title %} Hello ! {% endblock %}
+{% block title %}
+	Hello !
+{% endblock %}
 
 {% block body %}
-<h1> CUR </h1>
-    {{form(quizForm)}}
+	<h1>Quiz {{quiz_id}}<h1>
+	<h2>
+		{{questions.qnumber}}. {{questions.content}}
+	</h2>
+
+	{{ form_start (quizForm) }}
+		{{ form_widget (quizForm.question) }}	{# HIDDEN #}
+		{{ form_widget (quizForm.quiz) }}		{# HIDDEN #}
+		{{ form_widget (quizForm.answer, {'attr': {'class': 'quizAnswers'}}) }}
+		<div>
+	{{ form_end (quizForm) }}
+
+
 
 
 {% endblock %}

@@ -14,7 +14,9 @@
 				<th>QUIZ</th>
 				<th>MODULE</th>
 				{# <th>QUIZ_Type</th> #}
+				<th>q.id</th>
 				<th>QUESTION</th>
+				<th>answ.id</th>
 				<th>ANSWER</th>
 				<th>EDIT</th>
 				<th>DELETE</th>
@@ -25,8 +27,10 @@
 					<td><b>{{usr_answ.user.username}}</b></td>
 					<td>{{usr_answ.quiz.id}}</td>
 					<td>{{usr_answ.quiz.module.title}}</td>
+					<td>{{usr_answ.question.id}}</td>
 					{# <td>{{usr_answ.getQuizType}}</td> #}
 					<td>{{usr_answ.question.content}}</td>
+					<td>{{usr_answ.answer.id}}</td>
 					<td>{{usr_answ.answer.content}}</td>
 					<td>
 						<a href='#'>

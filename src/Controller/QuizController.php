@@ -20,6 +20,21 @@ use App\Form\QuizType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/* Embedded Form Stuff */
+use App\Entity\User;
+use App\Repository\AnswerRepository;
+use App\Repository\UserAnswerRepository;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+//use Symfony\Component\Form\Extension\Core\Type\EntityType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+/* SESSION STUFF */
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 class QuizController extends AbstractController
 {
     /**
@@ -32,7 +47,7 @@ class QuizController extends AbstractController
 
         $questions = $this->getDoctrine()
             ->getRepository(Question::class)
-            ->findBy(['quiz' => $id]);  
+            ->findBy(['quiz' => $id]);
 
         $answers = $this->getDoctrine()
             ->getRepository(Answer::class)
@@ -49,32 +64,67 @@ class QuizController extends AbstractController
     }
 
     /**
-     * @Route("quizTest/", name="quizTest")
+     * @Route("quizTest_{quiz_id}/{question_id}", name="quizTest")
      */
-    public function quizTest(EntityManagerInterface $em, Request $request)
+    public function quizTest(EntityManagerInterface $em, Request $request, SessionInterface $session,QuestionRepository $questionRepo, $quiz_id, $question_id)
     {
+        //Showing QUESTIONS withOUT the form
+        //$questions = $questionRepo->findOneBy(['quiz_id' => $quiz_id, 'question_id' => $question_id]);
+
+        $q_number = 1;
+        $questions = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->findOneBy(['quiz' => $quiz_id, 'id' => $question_id]);
+
+        //Putting QuizID & QuestionID in the SESSION
+        $session->set('quiz_id', $quiz_id);
+        $session->set('question_id', $question_id);
+        //dump($session);
+
+        //$foo = $session->get('quiz_id');
+        //dump($foo);
+        //$foo2 = $session->get('question_id');
+        //dump($foo2); 
+
+
         $form = $this->createForm(QuizFormType::class);
 
-        $form->handleRequest($request);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-
-            //dd($data);  //all good?
+            dump($data);  //all good?
 
             $userAnswer = new UserAnswer();
 
-            $userAnswer->setUser($data['username']);
-            $userAnswer->setQuiz($data['quiz']);
+            $userAnswer->setUser($this->getUser());          // generat automat prin $userAnswer->setUser($this->getUser());
+            $userAnswer->setQuiz($data['quiz']);             // specificate cu GET gen, "quizz_{id}/question_{nbr}"
             $userAnswer->setQuestion($data['question']);
             $userAnswer->setAnswer($data['answer']);
 
+            //dd($userAnswer);
             $em->persist($userAnswer);
             $em->flush();
+
+            //$question_id++;
+
+            if ($question_id == $question_id) {
+                $question_id = $question_id + 1;
+                return $this->redirectToRoute('quizTest', [
+                    'form' => $form->createView(),
+                    'questions' => $questions,
+                    'quiz_id' => $quiz_id,
+                    'question_id' => $question_id
+
+                ]);
+            }
         }
 
         return $this->render('quiz/form.html.twig', [
             'quizForm' => $form->createView(),
+            'questions' => $questions,
+            'quiz_id' => $quiz_id,
+            'question_id' => $question_id
         ]);
     }
 
@@ -98,7 +148,7 @@ class QuizController extends AbstractController
         ]);
     }
  */
-    
+
 
     /**
      * TODO replacer id par slug
@@ -106,10 +156,10 @@ class QuizController extends AbstractController
      * @Route("quizz_{id}/question_{nbr}", name="quizz_play")
      *
      */
-    /* public function play($id, Quiz $quiz, Request $request, $nbr, QuestionRepository $questionRepo)
+    public function play($id, Quiz $quiz, Request $request, $nbr, QuestionRepository $questionRepo)
     {
 
-        // IMPORTANT / FUNCTIONAL 
+        // AFFICHAGE QUESTION SANS FORMULAIRE
         $question = $questionRepo->findOneBy(['quiz' => $id, 'q_number' => $nbr]);
 
         $user = $this->getUser();
@@ -120,7 +170,7 @@ class QuizController extends AbstractController
             $question->getContent() => 'reponse 3',
             $question->getContent() => 'reponse 4',
             $question->getContent() => 'reponse 5'
-        ]; 
+        ];
 
         //dump($responses);
         //shuffle($responses);
@@ -136,6 +186,8 @@ class QuizController extends AbstractController
             ])
             ->getForm();
 
+
+        // COD CA SA AVANSEZI LA URMATOAREA SOLUTIE
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
@@ -158,5 +210,5 @@ class QuizController extends AbstractController
 
 
         ]);
-    } */
+    }
 }
