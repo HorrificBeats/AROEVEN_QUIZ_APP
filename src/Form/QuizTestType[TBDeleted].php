@@ -36,7 +36,9 @@ class QuizTestType extends AbstractType
                 'expanded' => true,     //Radio-boxes
                 'multiple' => false,    //1-btn only
             ])
-            ->add('save', SubmitType::class, ['label' => 'FINISH'])
+            ->add('save', SubmitType::class, [
+                'label' => 'FINISH',
+                ])
             /* ->getForm(); */
 
             

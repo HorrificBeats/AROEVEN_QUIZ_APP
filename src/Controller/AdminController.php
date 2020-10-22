@@ -2,30 +2,14 @@
 
 namespace App\Controller;
 
-/* Accesing Entities */
 
 use App\Entity\UserAnswer;
 use App\Entity\Module;
 use App\Entity\Quiz;
 use App\Entity\Answer;
 use App\Entity\Slide;
-use App\Entity\UserModule;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-
-//PHP OFFICE Resources
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-//Sonata Exporter
-use Exporter\Handler;
-use Exporter\Source\PDOStatementSourceIterator;
-use Exporter\Writer\CsvWriter;
-use Sonata\Exporter\Writer\XlsWriter;
-
 
 
 class AdminController extends AbstractController
@@ -143,7 +127,7 @@ class AdminController extends AbstractController
             ->getRepository(UserAnswer::class)
             ->findAll(); */
 
-
+        //dump($userAnswer);
         return $this->render('admin/read.html.twig', [
             'controller_name' => 'AdminController',
             'userAnswer' => $userAnswer

@@ -51,6 +51,8 @@ class UserAnswer
      */
     private $question;
 
+    private $quiz_type;
+
     public function getId(): ?int
     {
         return $this->id;

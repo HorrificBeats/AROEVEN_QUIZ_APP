@@ -7,18 +7,38 @@
 				Welcome!
 			{% endblock %}
 		</title>
-		{% block stylesheets %}{% endblock %}
+		{% block stylesheets %}
+			{# BOOTSTRAP #}
+			<link
+			rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+			{# CSS #}
+			<link rel="stylesheet" href="CSS.css">
+			<link
+			rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+			{# CSS #}
+			<link
+			rel="stylesheet" href="CSS.css">
+			<!-- Font Awesome -->
+			<link
+			rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+			<!-- Google Fonts -->
+			<link
+			rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+			<!-- Material Design Bootstrap -->
+			<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+		{% endblock %}
 	</head>
-	<body style='background-color:#98B1E4'>
-		<header>
+	<body style='background-color:#98B1E4' class='container'>
+		{# OLD NavBar #}
+		<header style="display:none">
 			<nav>
 				{# IF user is logged in #}
 				{% if app.user %}
 					<div style="background-color:white; float:right">
 						Top of the morning to you,
 						<b>
-							<i>{{ app.user.username }}</b>
-						</i>
+							<i>{{ app.user.username }}</i>
+						</b>
 						!
 					</div>
 					<br>
@@ -58,17 +78,19 @@
 				{# DOAR DACA SUNT IN ADMIN_PANEL #}
 				{% if app.request.attributes.get('_route') starts with 'admin_' %}
 					<div style='float: left'>
-						<h1><a href="{{ path('export') }}">Export XCEL</a></h1>
+						<h1>
+							<a href="{{path('export')}}">Export XCEL</a>
+						</h1>
 						<br>
-						<a href='{{ path('admin_results') }}' {# MOVING ACTIVE CLASS FOR CLICKED BUTTON TO MARK SECTION #} {% if app.request.attributes.get('_route') == 'admin_results' %} class='active' {% endif %}>
+						<a href='{{path('admin_results')}}' {# MOVING ACTIVE CLASS FOR CLICKED BUTTON TO MARK SECTION #} {% if app.request.attributes.get('_route') == 'admin_results' %} class='active' {% endif %}>
 							• RESULTS
 						</a>
 						<br>
-						<a href='{{ path('admin_modules') }}' {% if app.request.attributes.get('_route') == 'admin_modules' %} class='active' {% endif %}>
+						<a href='{{path('admin_modules')}}' {% if app.request.attributes.get('_route') == 'admin_modules' %} class='active' {% endif %}>
 							• MODULES
 						</a>
 						<br>
-						<a href='{{ path('admin_quizzes') }}' {% if app.request.attributes.get('_route') == 'admin_quizzes' %} class='active' {% endif %}>
+						<a href='{{path('admin_quizzes')}}' {% if app.request.attributes.get('_route') == 'admin_quizzes' %} class='active' {% endif %}>
 							• QUIZ
 						</a>
 						<br>
@@ -97,9 +119,86 @@
 				}
 			</style>
 		</header>
+
+		{# <!--BOOSTRAP NAVBAR --> #}
+		<nav class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1 rounded-bottom">
+			{# LOGO BTN #}
+			<a class="navbar-brand" href="{{path('home')}}">LOGO HOME</a>
+
+			{# NavCollapse #}
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555" aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+				<ul
+					class="navbar-nav mr-auto">
+
+					{# HOME #}
+					<li class="nav-item {% if app.request.attributes.get('_route') == 'home' %} active {% endif %}">
+						<a class="nav-link" href="{{path('home')}}">Home
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+
+					{# TUTORIAL #}
+					<li class="nav-item {% if app.request.attributes.get('_route') == 'tutorial' %} active {% endif %}">
+						<a class="nav-link" href="{{path('tutorial')}}">Tutorial</a>
+					</li>
+
+					{# MODULES #}
+					<li class="nav-item{% if app.request.attributes.get('_route') == 'modules_page' %} active {% endif %}">
+						<a class="nav-link" href="{{path('modules_page')}}">Modules</a>
+					</li>
+
+
+					{# ONLY FOR ADMIN #}
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item{% if app.request.attributes.get('_route') == 'admin_panel' %} active {% endif %}">
+							<a class="nav-link" href="{{path('admin_panel')}}">ADMIN</a>
+						</li>
+					{% endif %}
+				</ul>
+				{# RIGHT-SIDE BTNS #}
+
+				<ul class="navbar-nav ml-auto nav-flex-icons">
+					{% if app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_logout')}}">LOGOUT</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{path('app_login')}}">LOGIN</a>
+						</li>
+					{% endif %}
+				</ul>
+				<span style='color:white'>
+					<i>wwwwuuut?</i>
+				</span>
+			</div>
+		</nav>
+		{##
+		{# ADMIN NAVBAR #}
+		{##}
+
+		{% for message in app.flashes('logout') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
 		{% block body %}{% endblock %}
 		{% block javascripts %}
-		<script src="{{ asset('js/main.js')}}"></script>
+			<script src="{{ asset('js/main.js')}}"></script>
+			{# JS 4 Boostrap #}
+			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+			<!-- JQuery -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<!-- Bootstrap tooltips -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+			<!-- MDB core JavaScript -->
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 		{% endblock %}
 	</body>
-</html>
+</html></body></html>

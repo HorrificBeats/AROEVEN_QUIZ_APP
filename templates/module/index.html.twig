@@ -4,34 +4,25 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<div class='container col-lg-12'>
+		<div class='text-center'>
+			<div>
+				{% for module in modules %}
+					<a href="{{ path('module', {'id' : module.id})}}">
+						{# CUM FUNCTIONEAZA MAGIA ASTA NEAGRA??? #}
 
-	<ul>
-		{% for module in modules %}
-			<a href="{{ path('module', {'id' : module.id})}}">
-				{# CUM FUNCTIONEAZA MAGIA ASTA NEAGRA??? #}
-
-				{# Culoare dinamica in functie de ID #}
-				{% if module.id is odd %}
-						<div style='background-color:red; float:left; width:100px; height:100px; text-align:center; margin-left: 10px;'> {{module.title}}
-					</div>
-				{% else %}
-					<div style='background-color:white; float:left; width:100px; height:100px; text-align:center; margin-left: 10px;'>
-						{{module.title}}
-					</div>
-				{% endif %}
-			</a>
-		{% endfor %}
-	</ul>
+						{# Culoare dinamica in functie de ID #}
+							{% if module.id is odd %}
+								<div style='background-color:red; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5'> {{module.title}}
+							</div>
+						{% else %}
+							<div style='background-color:white; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5'>
+								{{module.title}}
+							</div>
+						{% endif %}
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock %}

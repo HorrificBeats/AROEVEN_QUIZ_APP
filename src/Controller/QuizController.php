@@ -38,6 +38,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class QuizController extends AbstractController
 {
     /**
+     * STATIC FORM w/o submission | ToBeDelete
      * @Route("/quiz/{id}", name="quiz")
      */
     public function quiz($id)
@@ -64,14 +65,14 @@ class QuizController extends AbstractController
     }
 
     /**
-     * @Route("quizTest_{quiz_id}/{question_id}", name="quizTest")
+     * Quiz PRE
+     * @Route("quizPRE_{quiz_id}/{question_id}", name="quizPRE_")
      */
-    public function quizTest(EntityManagerInterface $em, Request $request, SessionInterface $session,QuestionRepository $questionRepo, $quiz_id, $question_id)
+    public function quizPRE_(EntityManagerInterface $em, Request $request, SessionInterface $session,QuestionRepository $questionRepo, $quiz_id, $question_id)
     {
-        //Showing QUESTIONS withOUT the form
-        //$questions = $questionRepo->findOneBy(['quiz_id' => $quiz_id, 'question_id' => $question_id]);
-
         $q_number = 1;
+
+        //Showing QUESTIONS withOUT the form
         $questions = $this->getDoctrine()
             ->getRepository(Question::class)
             ->findOneBy(['quiz' => $quiz_id, 'id' => $question_id]);
@@ -93,6 +94,7 @@ class QuizController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $data['quiztype'] = 'ASS';
             dump($data);  //all good?
 
             $userAnswer = new UserAnswer();
@@ -101,21 +103,29 @@ class QuizController extends AbstractController
             $userAnswer->setQuiz($data['quiz']);             // specificate cu GET gen, "quizz_{id}/question_{nbr}"
             $userAnswer->setQuestion($data['question']);
             $userAnswer->setAnswer($data['answer']);
+            //$userAnswer->setQuizType('PRE');
+            $userAnswer->setQuizType($data['quiztype']);
 
             //dd($userAnswer);
+
+
             $em->persist($userAnswer);
             $em->flush();
 
             //$question_id++;
 
-            if ($question_id == $question_id) {
+            if ($question_id < 5) {
                 $question_id = $question_id + 1;
-                return $this->redirectToRoute('quizTest', [
+                return $this->redirectToRoute('quizPRE_', [
                     'form' => $form->createView(),
                     'questions' => $questions,
                     'quiz_id' => $quiz_id,
                     'question_id' => $question_id
 
+                ]);
+            } else {
+                return $this->redirectToRoute('CONGRATULATIONS-PRE', [
+                    'id' => 1
                 ]);
             }
         }
@@ -128,6 +138,17 @@ class QuizController extends AbstractController
         ]);
     }
 
+/**
+ * @Route("quizPRE_CONGRATULATIONS", name="CONGRATULATIONS-PRE")
+ */
+public function congratsPagePRE()
+{
+    return $this->render('quiz/congrats.html.twig', []);
+}
+
+
+
+// ================================ TRIALS ========================================
     /**
      * @Route("/test", name="quiz")
      */

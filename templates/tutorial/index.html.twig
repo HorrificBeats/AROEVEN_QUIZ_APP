@@ -16,38 +16,22 @@
 			padding: 2px 6px;
 		}
 	</style>
-
-	{# <div class="example-wrapper">
-			<h1>Hello
-				{{ controller_name }}! ✅</h1>
-	
-			This friendly message is coming from:
-			<ul>
-				<li>Your controller at
-					<code>
-						<a href="{{ '/Users/Horrific/Google Drive/A.F.P.A. WebDev/_♞PROIECT FINAL/1.MY_SYMFONY_APP/src/Controller/TutorialController.php'|file_link(0) }}">src/Controller/TutorialController.php</a>
-					</code>
-				</li>
-				<li>Your template at
-					<code>
-						<a href="{{ '/Users/Horrific/Google Drive/A.F.P.A. WebDev/_♞PROIECT FINAL/1.MY_SYMFONY_APP/templates/tutorial/index.html.twig'|file_link(0) }}">templates/tutorial/index.html.twig</a>
-					</code>
-				</li>
-			</ul>
-		</div> #}
-
-	<h1>TUTORIAL</h1>
-	<div>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
+	<div class='container rounded col-lg-12 p-4' style='background-color: #f0f8ff'>
 		<br>
-		<p>Aenean odio nisi, fermentum vitae faucibus at, porttitor sed ipsum. Donec bibendum sagittis feugiat. Mauris pulvinar magna in velit luctus, non elementum sapien auctor. Cras gravida pellentesque mi, id tincidunt lorem tempor quis. Donec eget enim eu quam lacinia rutrum et eu enim. Nulla suscipit porttitor orci, sed viverra mauris fringilla et. Proin id diam ultrices, rhoncus leo at, ullamcorper justo. Cras eget nunc vitae eros euismod mollis. Ut tristique nibh ut libero luctus hendrerit. Nunc gravida diam nec placerat consequat. Sed laoreet justo ut volutpat posuere. Sed gravida sit amet urna in efficitur. Aenean vitae quam sit amet ex semper viverra.</p>
-		<br>
-		<p>Nam mollis accumsan lectus ac scelerisque. Vivamus elementum vehicula orci. Curabitur sit amet sem finibus, pellentesque velit eget, sodales nulla. Curabitur tempor velit massa, vel tristique justo gravida non. Duis nunc ante, ullamcorper in quam sit amet, ullamcorper semper leo. Nulla vel molestie erat. Proin rhoncus lorem sit amet ligula tincidunt euismod.</p>
+		<h1>TUTORIAL</h1>
+		<div class="text-justify">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
+			<br>
+			<p>Aenean odio nisi, fermentum vitae faucibus at, porttitor sed ipsum. Donec bibendum sagittis feugiat. Mauris pulvinar magna in velit luctus, non elementum sapien auctor. Cras gravida pellentesque mi, id tincidunt lorem tempor quis. Donec eget enim eu quam lacinia rutrum et eu enim. Nulla suscipit porttitor orci, sed viverra mauris fringilla et. Proin id diam ultrices, rhoncus leo at, ullamcorper justo. Cras eget nunc vitae eros euismod mollis. Ut tristique nibh ut libero luctus hendrerit. Nunc gravida diam nec placerat consequat. Sed laoreet justo ut volutpat posuere. Sed gravida sit amet urna in efficitur. Aenean vitae quam sit amet ex semper viverra.</p>
+			<br>
+			<p>Nam mollis accumsan lectus ac scelerisque. Vivamus elementum vehicula orci. Curabitur sit amet sem finibus, pellentesque velit eget, sodales nulla. Curabitur tempor velit massa, vel tristique justo gravida non. Duis nunc ante, ullamcorper in quam sit amet, ullamcorper semper leo. Nulla vel molestie erat. Proin rhoncus lorem sit amet ligula tincidunt euismod.</p>
+		</div>
 	</div>
-	<br>
-	<a href="{{ path('quiz', {'id' : 1}) }}">
-		<button>
+	<div class='text-center'>
+	<a href="{{ path('quizPRE_', {'quiz_id' : 1, "question_id" : 1}) }}">
+		<button class='btn btn-secondary'>
 			START
 		</button>
 	</a>
+	</div>
 {% endblock %}

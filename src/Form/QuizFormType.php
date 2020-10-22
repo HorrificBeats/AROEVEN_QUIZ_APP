@@ -19,7 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 //use Symfony\Component\Form\Extension\Core\Type\EntityType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -48,7 +49,7 @@ class QuizFormType extends AbstractType
                     },
                     //To hide stuff
                     //'disabled' => true, IF ENABLED IT DOESNT SEND ANY DATA
-                    'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
+                'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
             ])
 
             ->add('question', EntityType::class, [
@@ -57,9 +58,10 @@ class QuizFormType extends AbstractType
                     return $er->createQueryBuilder('question') //CORRECT
                         ->andWhere('question.id = :question_id')
                         ->setParameter('question_id', $this->sessionInterface->get('question_id'))
+                        //->orWhere("d = 2")
                         ;
                 },
-                //'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
+                'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
             ])
 
             ->add('answer', EntityType::class, [
@@ -77,6 +79,12 @@ class QuizFormType extends AbstractType
                 },
                 'attr' => array('id'=>'title-field')
             ])
+
+            /* ->add('quiztype', TextType::class, [
+                //'class' => UserAnswer::class,
+                'data' => 'pre',
+                'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
+            ]) */
             ->add('save', SubmitType::class, ['label' => 'NEXT QUESTION'])
             // ->getForm();
         ;

@@ -7,39 +7,44 @@
 	{% for flashError in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
-
 	<div>
-		<div style='float:left; background-color: #CACBD3;  width:56%; padding:15px'>
-			<h1>WELCOME!</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
-		</div>
-
-		{# SIGN UP Shows Only for non-loggedIn users #}
-		{% if not app.user %}
-			<div style='float:right; background-color: #CADBD9; width:37%; padding:15px;'>
-				<h2>SIGN UP HERE</h2>
-				
-				{{ form_start(registrationForm) }}
-				{% block form_label_errors %}{% endblock %}
-
-				{{ form_row(registrationForm.username) }}
-				{{ form_row(registrationForm.plainPassword) }}
-				{{ form_row(registrationForm.birthdate) }}
-				{{ form_row(registrationForm.agreeTerms) }}
-
-				
-				<button type="submit" class="btn">Register</button>
-				{{ form_end(registrationForm) }}
-
+		<div class='container mt-4'>
+			<div style=' background-color: #f0f8ff; padding:15px;' class='card {% if not app.user %} col-lg-5 {% else %} col-lg-12 {% endif %}'>
+				<h1>WELCOME!</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
 			</div>
-		{% endif %}
-	</div>
-	<div>
-		{# 1/2 Din protectie; cealalta jumatate este in CONTROLLER #}
-		{% if app.user %}
-			<a href='{{ path('tutorial') }}'>
-				<button>GO TO TUTORIAL</button>
-			</a>
-		{% endif %}
+
+			{# SIGN UP Shows Only for non-loggedIn users #}
+			{% if not app.user %}
+				<div style='float:right; background-color: #CADBD9; padding:15px;' class='container rounded col-lg-6'>
+					<h2>SIGN UP HERE</h2>
+
+					{% form_theme registrationForm 'bootstrap_4_horizontal_layout.html.twig' %}
+
+					{{ form_start(registrationForm) }}
+					{% block form_label_errors %}{% endblock %}
+
+					{{ form_row(registrationForm.username) }}
+					{{ form_row(registrationForm.plainPassword) }}
+					{{ form_row(registrationForm.birthdate) }}
+					{{ form_row(registrationForm.agreeTerms) }}
+
+					<div class='text-center'>
+						<button type="submit" class="btn btn-primary">Register</button>
+					</div>
+					{{ form_end(registrationForm) }}
+
+				</div>
+			{% endif %}
+		</div>
+		<div
+			class='text-center'>
+			{# 1/2 Din protectie; cealalta jumatate este in CONTROLLER #}
+			{% if app.user %}
+				<a href='{{ path('tutorial') }}'>
+					<button class='btn btn-dark mt-3'>GO TO TUTORIAL</button>
+				</a>
+			{% endif %}
+		</div>
 	</div>
 {% endblock %}

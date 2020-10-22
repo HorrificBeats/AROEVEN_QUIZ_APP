@@ -65,6 +65,10 @@ class ExportController extends AbstractController
         $sheet->getCell('D1')->setValue('Answer');
         $sheet->getCell('E1')->setValue('Answer_ID');
 
+        $sheet->getCell('F1')->setValue('Answer_ID');
+        $sheet->getCell('G1')->setValue('Answer_ID');
+
+
 
         // Increase row cursor after header write
         $sheet->fromArray($this->getData(), null, 'A2', true);
