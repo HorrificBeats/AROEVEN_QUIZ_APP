@@ -46,9 +46,9 @@ class QuizFormType extends AbstractType
                     return $er->createQueryBuilder('quiz')
                         ->andWhere('quiz.id = :quiz_id')
                         ->setParameter('quiz_id', $this->sessionInterface->get('quiz_id'));
-                    },
-                    //To hide stuff
-                    //'disabled' => true, IF ENABLED IT DOESNT SEND ANY DATA
+                },
+                //To hide stuff
+                //'disabled' => true, IF ENABLED IT DOESNT SEND ANY DATA
                 'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
             ])
 
@@ -59,7 +59,7 @@ class QuizFormType extends AbstractType
                         ->andWhere('question.id = :question_id')
                         ->setParameter('question_id', $this->sessionInterface->get('question_id'))
                         //->orWhere("d = 2")
-                        ;
+                    ;
                 },
                 'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
             ])
@@ -75,16 +75,15 @@ class QuizFormType extends AbstractType
                     return $er->createQueryBuilder('answ')
                         ->andWhere('answ.question = :question_id')
                         ->setParameter('question_id', $this->sessionInterface->get('question_id'));
-                        //->setParameter('question_id', 1);
+                    //->setParameter('question_id', 1);
                 },
-                'attr' => array('id'=>'title-field')
+                'attr' => array('id' => 'title-field')
             ])
 
-            /* ->add('quiztype', TextType::class, [
-                //'class' => UserAnswer::class,
-                'data' => 'pre',
-                'attr' => ['style' => 'display:none'] //Hiden field w/ GET value
-            ]) */
+            ->add('quiz_type', HiddenType::class, [
+                'required'   => false,
+                'empty_data' => 'BOTTOCKS',
+            ])
             ->add('save', SubmitType::class, ['label' => 'NEXT QUESTION'])
             // ->getForm();
         ;

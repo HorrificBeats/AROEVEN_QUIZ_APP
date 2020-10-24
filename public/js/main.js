@@ -5,7 +5,7 @@ function showSlide(elementID) {
     var elem = document.getElementById(elementID);
     if (!elem) {
         //alert("No slides found.")
-        window.location = "{{ path('module', {'id' : 2}) }}";
+        //window.location = "{{ path('module', {'id' : 2}) }}";
         return;
     }
     var slides = document.getElementsByClassName('slide');

@@ -29,9 +29,9 @@
 		{% endblock %}
 	</head>
 	<body style='background-color:#98B1E4' class='container'>
+		{# ================================ DEPRECATED ======================================== #}
 		{# OLD NavBar #}
-		<header style="display:none">
-			<nav>
+			<header style="display:none"> <nav>
 				{# IF user is logged in #}
 				{% if app.user %}
 					<div style="background-color:white; float:right">
@@ -73,8 +73,7 @@
 					{% endif %}
 				</ul>
 			</nav>
-			<div
-				id='admin_sideMenu' class='sidenav'>
+			<div id='admin_sideMenu' class='sidenav'>
 				{# DOAR DACA SUNT IN ADMIN_PANEL #}
 				{% if app.request.attributes.get('_route') starts with 'admin_' %}
 					<div style='float: left'>
@@ -119,9 +118,10 @@
 				}
 			</style>
 		</header>
-
-		{# <!--BOOSTRAP NAVBAR --> #}
-		<nav class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1 rounded-bottom">
+		{# =================================== IN USE ===================================== #}
+		{# <!--BOOTSTRAP NAVBAR --> #}
+		<nav
+			class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1 rounded-bottom">
 			{# LOGO BTN #}
 			<a class="navbar-brand" href="{{path('home')}}">LOGO HOME</a>
 
@@ -176,17 +176,101 @@
 				</span>
 			</div>
 		</nav>
-		{##
-		{# ADMIN NAVBAR #}
+
+
+		{## TODO
+						{# ADMIN NAVBAR #}
 		{##}
-
-		{% for message in app.flashes('logout') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-
 		{% block body %}{% endblock %}
+		{% block footer %}
+			<footer class='container fixed-bottom'>
+				<!-- Footer -->
+				<footer class="page-footer font-small blue pt-4">
+
+					<!-- Footer Links -->
+					<div class="container-fluid text-center text-md-left">
+
+						<!-- Grid row -->
+						<div class="row">
+
+							<!-- Grid column -->
+							<div class="col-md-6 mt-md-0 mt-3">
+
+								<!-- Content -->
+								<h5 class="text-uppercase">Footer Content</h5>
+								<p>Here you can use rows and columns to organize your footer content.</p>
+
+							</div>
+							<!-- Grid column -->
+
+							<hr
+							class="clearfix w-100 d-md-none pb-3">
+
+							<!-- Grid column -->
+							<div class="col-md-3 mb-md-0 mb-3">
+
+								<!-- Links -->
+								<h5 class="text-uppercase">Links</h5>
+
+								<ul class="list-unstyled">
+									<li>
+										<a href="#!">Link 1</a>
+									</li>
+									<li>
+										<a href="#!">Link 2</a>
+									</li>
+									<li>
+										<a href="#!">Link 3</a>
+									</li>
+									<li>
+										<a href="#!">Link 4</a>
+									</li>
+								</ul>
+
+							</div>
+							<!-- Grid column -->
+
+							<!-- Grid column -->
+							<div class="col-md-3 mb-md-0 mb-3">
+
+								<!-- Links -->
+								<h5 class="text-uppercase">Links</h5>
+
+								<ul class="list-unstyled">
+									<li>
+										<a href="#!">Link 1</a>
+									</li>
+									<li>
+										<a href="#!">Link 2</a>
+									</li>
+									<li>
+										<a href="#!">Link 3</a>
+									</li>
+									<li>
+										<a href="#!">Link 4</a>
+									</li>
+								</ul>
+
+							</div>
+							<!-- Grid column -->
+
+						</div>
+						<!-- Grid row -->
+
+					</div>
+					<!-- Footer Links -->
+
+					<!-- Copyright -->
+					<div class="footer-copyright text-center py-3">© 2020 Copyright:
+						<a href="https://mdbootstrap.com/">
+							MDBootstrap.com</a>
+					</div>
+					<!-- Copyright -->
+
+				</footer>
+				<!-- Footer -->
+			</footer>
+		{% endblock %}
 		{% block javascripts %}
 			<script src="{{ asset('js/main.js')}}"></script>
 			{# JS 4 Boostrap #}

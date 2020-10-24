@@ -4,25 +4,25 @@
 {% endblock %}
 
 {% block body %}
-	<div class='container col-lg-12'>
-		<div class='text-center'>
-			<div>
-				{% for module in modules %}
-					<a href="{{ path('module', {'id' : module.id})}}">
-						{# CUM FUNCTIONEAZA MAGIA ASTA NEAGRA??? #}
-
-						{# Culoare dinamica in functie de ID #}
-							{% if module.id is odd %}
-								<div style='background-color:red; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5'> {{module.title}}
-							</div>
-						{% else %}
-							<div style='background-color:white; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5'>
-								{{module.title}}
-							</div>
-						{% endif %}
-					</a>
-				{% endfor %}
-			</div>
+	<div class='container col-lg-9'>
+		{# <div class='text-center'> #}
+		<div>
+			{% for module in modules %}
+				<a
+					href="{{ path('module', {'id' : module.id})}}">
+					{# Culoare dinamica in functie de ID #}
+					{% if module.id is odd %}
+						<div style='background-color:red; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5 col-lg-6 p-2'>
+							{{module.title}}
+						</div>
+					{% else %}
+						<div style='background-color:white; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5 col-lg-6 p-2'>
+							{{module.title}}
+						</div>
+					{% endif %}
+				</a>
+			{% endfor %}
 		</div>
+		{# </div> #}
 	</div>
 {% endblock %}

@@ -53,6 +53,8 @@ class ExportController extends AbstractController
      */
     public function export()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        /* DENYING ACCESS */
         $spreadsheet = new Spreadsheet();
 
         $sheet = $spreadsheet->getActiveSheet();
