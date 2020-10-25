@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ModuleController!
+{% block title %} Hello ModuleController!
+	{# TBDeleted #}
 {% endblock %}
 
 {% block body %}
@@ -13,7 +14,8 @@
 
 		{# Each MODULE has different colors  #}
 		{% if id is odd %}
-			<div style='background-color: #ff7373' class='rounded'>
+			<div
+				style='background-color: #ff7373' class='rounded'>
 				{# MODULE A #}
 				{% for slide in slides %}
 					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
@@ -33,7 +35,8 @@
 				{% endfor %}
 			</div>
 		{% else %}
-			<div style='background-color: #fff5eb' class='rounded'>
+			<div
+				style='background-color: #fff5eb' class='rounded'>
 				{# MODULE B #}
 				{% for slide in slides %}
 					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 6 ? 'style="display:"' : 'style="display:none"' }}>
@@ -70,7 +73,7 @@
 			</a>
 		{% elseif module[id-1] == module[1] %}
 			{# IF I'm on the 2nd Module, I'll go to the POST-QUIZ #}
-			<a href="{{ path('quizPRE_', {'quiz_id' : 1, "question_id" : 1})}}">
+			<a href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
 				<button class='btn btn-danger'>
 					Go To Quiz-POST
 				</button>

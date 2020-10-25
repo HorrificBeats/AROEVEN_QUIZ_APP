@@ -79,7 +79,7 @@ class ExportController extends AbstractController
         $writer = new Xlsx($spreadsheet);
 
         // Create a Temporary file in the system
-        $fileName = "Results". date('d-m-Y_h.i a') . ".xlsx";
+        $fileName = "Results ". date('d-m-Y h:i a') . ".xlsx";
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
 
         // Create the excel file in the tmp directory of the system

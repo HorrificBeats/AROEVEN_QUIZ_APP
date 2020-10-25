@@ -8,16 +8,22 @@
 			{% endblock %}
 		</title>
 		{% block stylesheets %}
+			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/b-1.6.5/kt-2.5.3/r-2.2.6/datatables.min.css"/>
+
+			<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/b-1.6.5/kt-2.5.3/r-2.2.6/datatables.min.js"></script>
+
+			{# H: CSS #}
+			<link
+			rel="stylesheet" href="{{ asset('css/app.css')}}">
 			{# BOOTSTRAP #}
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 			<link
 			rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-			{# CSS #}
-			<link rel="stylesheet" href="CSS.css">
+
+			{# DATA TABLES .css #}
 			<link
-			rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-			{# CSS #}
-			<link
-			rel="stylesheet" href="CSS.css">
+			rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
 			<!-- Font Awesome -->
 			<link
 			rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -25,8 +31,22 @@
 			<link
 			rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 			<!-- Material Design Bootstrap -->
-			<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+			<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+
+			{# random #}
+			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.jqueryui.min.css"/>
+
+			<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.jqueryui.min.js"></script>
+
+			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.css"/>
+
+			<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.js"></script>
+
+
 		{% endblock %}
+
 	</head>
 	<body style='background-color:#98B1E4' class='container'>
 		{# ================================ DEPRECATED ======================================== #}
@@ -73,7 +93,8 @@
 					{% endif %}
 				</ul>
 			</nav>
-			<div id='admin_sideMenu' class='sidenav'>
+			<div
+				id='admin_sideMenu' class='sidenav'>
 				{# DOAR DACA SUNT IN ADMIN_PANEL #}
 				{% if app.request.attributes.get('_route') starts with 'admin_' %}
 					<div style='float: left'>
@@ -118,6 +139,8 @@
 				}
 			</style>
 		</header>
+
+
 		{# =================================== IN USE ===================================== #}
 		{# <!--BOOTSTRAP NAVBAR --> #}
 		<nav
@@ -146,15 +169,15 @@
 					</li>
 
 					{# MODULES #}
-					<li class="nav-item{% if app.request.attributes.get('_route') == 'modules_page' %} active {% endif %}">
+					<li class="nav-item {% if app.request.attributes.get('_route') == 'modules_page' %} active {% endif %}">
 						<a class="nav-link" href="{{path('modules_page')}}">Modules</a>
 					</li>
 
 
 					{# ONLY FOR ADMIN #}
 					{% if is_granted('ROLE_ADMIN') %}
-						<li class="nav-item{% if app.request.attributes.get('_route') == 'admin_panel' %} active {% endif %}">
-							<a class="nav-link" href="{{path('admin_panel')}}">ADMIN</a>
+						<li class="nav-item {% if app.request.attributes.get('_route') == 'admin_results' %} active {% endif %}">
+							<a class="nav-link" href="{{path('admin_results')}}">ADMIN</a>
 						</li>
 					{% endif %}
 				</ul>
@@ -167,114 +190,149 @@
 						</li>
 					{% else %}
 						<li class="nav-item">
-							<a class="nav-link" href="{{path('app_login')}}">LOGIN</a>
+							<a class="nav-link active" href="{{path('app_login')}}">LOGIN</a>
 						</li>
 					{% endif %}
 				</ul>
-				<span style='color:white'>
-					<i>wwwwuuut?</i>
+				<span class='text-warning'>
+					<i stylee='font-size:18px'>
+						{% if app.user %}
+							{{ app.user.username }}</i>
+					{% endif %}
 				</span>
 			</div>
 		</nav>
 
 
 		{## TODO
-						{# ADMIN NAVBAR #}
+																			{# ADMIN NAVBAR #}
+		{% if app.request.attributes.get('_route') starts with 'admin_' %}
+			<div class="btn-group  float-right" role="group">
+				<a href="{{path('admin_results')}}" class="btn btn-secondary btn-md {% if app.request.attributes.get('_route') == 'admin_results' %} active {% endif %}">RESULTS
+				</a>
+				<br>
+				<a href="{{path('admin_modules')}}" class="btn btn-secondary  btn-md {% if app.request.attributes.get('_route') == 'admin_modules' %} active {% endif %}">MODULES
+				</a>
+				<br>
+				<a href="{{path('admin_quizzes')}}" class="btn btn-secondary  btn-md {% if app.request.attributes.get('_route') == 'admin_quizzes' %} active {% endif %}">QUIZ
+				</a>
+			</div>
+		{% endif %}
+		{% if app.request.attributes.get('_route') == 'admin_results' %}
+			<div class="btn-group  float-right" role="group">
+				<a href="{{path('export')}}" class="btn btn-light btn-md text-body font-weight-bold">
+					EXPORT
+				</a>
+			</div>
+		{% endif %}
+		<br>
 		{##}
+
+
 		{% block body %}{% endblock %}
-		{% block footer %}
-			<footer class='container fixed-bottom'>
-				<!-- Footer -->
-				<footer class="page-footer font-small blue pt-4">
 
-					<!-- Footer Links -->
-					<div class="container-fluid text-center text-md-left">
 
-						<!-- Grid row -->
-						<div class="row">
+		{# {% block footer %} #}
+		{# <footer class='container fixed-bottom'>
+																				<!-- Footer -->
+																				<footer class="page-footer font-small blue pt-4">
+																
+																					<!-- Footer Links -->
+																					<div class="container-fluid text-center text-md-left">
+																
+																						<!-- Grid row -->
+																						<div class="row">
+																
+																							<!-- Grid column -->
+																							<div class="col-md-6 mt-md-0 mt-3">
+																
+																								<!-- Content -->
+																								<h5 class="text-uppercase">Footer Content</h5>
+																								<p>Here you can use rows and columns to organize your footer content.</p>
+																
+																							</div>
+																							<!-- Grid column -->
+																
+																							<hr
+																							class="clearfix w-100 d-md-none pb-3">
+																
+																							<!-- Grid column -->
+																							<div class="col-md-3 mb-md-0 mb-3">
+																
+																								<!-- Links -->
+																								<h5 class="text-uppercase">Links</h5>
+																
+																								<ul class="list-unstyled">
+																									<li>
+																										<a href="#!">Link 1</a>
+																									</li>
+																									<li>
+																										<a href="#!">Link 2</a>
+																									</li>
+																									<li>
+																										<a href="#!">Link 3</a>
+																									</li>
+																									<li>
+																										<a href="#!">Link 4</a>
+																									</li>
+																								</ul>
+																
+																							</div>
+																							<!-- Grid column -->
+																
+																							<!-- Grid column -->
+																							<div class="col-md-3 mb-md-0 mb-3">
+																
+																								<!-- Links -->
+																								<h5 class="text-uppercase">Links</h5>
+																
+																								<ul class="list-unstyled">
+																									<li>
+																										<a href="#!">Link 1</a>
+																									</li>
+																									<li>
+																										<a href="#!">Link 2</a>
+																									</li>
+																									<li>
+																										<a href="#!">Link 3</a>
+																									</li>
+																									<li>
+																										<a href="#!">Link 4</a>
+																									</li>
+																								</ul>
+																
+																							</div>
+																							<!-- Grid column -->
+																
+																						</div>
+																						<!-- Grid row -->
+																
+																					</div>
+																					<!-- Footer Links -->
+																
+																					<!-- Copyright -->
+																					<div class="footer-copyright text-center py-3">© 2020 Copyright:
+																						<a href="https://mdbootstrap.com/">
+																							MDBootstrap.com</a>
+																					</div>
+																					<!-- Copyright -->
+																
+																				</footer>
+																				<!-- Footer -->
+																			</footer> #}
+		{# {% endblock %} #}
+			{% block javascripts %}
+			{# H: main.js #}<script src="{{ asset('js/main.js')}}"> </script>
 
-							<!-- Grid column -->
-							<div class="col-md-6 mt-md-0 mt-3">
+			{# DATA TABLES .js + BootStrap #}
+			<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
-								<!-- Content -->
-								<h5 class="text-uppercase">Footer Content</h5>
-								<p>Here you can use rows and columns to organize your footer content.</p>
+			{# JQuery #}
+			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-							</div>
-							<!-- Grid column -->
-
-							<hr
-							class="clearfix w-100 d-md-none pb-3">
-
-							<!-- Grid column -->
-							<div class="col-md-3 mb-md-0 mb-3">
-
-								<!-- Links -->
-								<h5 class="text-uppercase">Links</h5>
-
-								<ul class="list-unstyled">
-									<li>
-										<a href="#!">Link 1</a>
-									</li>
-									<li>
-										<a href="#!">Link 2</a>
-									</li>
-									<li>
-										<a href="#!">Link 3</a>
-									</li>
-									<li>
-										<a href="#!">Link 4</a>
-									</li>
-								</ul>
-
-							</div>
-							<!-- Grid column -->
-
-							<!-- Grid column -->
-							<div class="col-md-3 mb-md-0 mb-3">
-
-								<!-- Links -->
-								<h5 class="text-uppercase">Links</h5>
-
-								<ul class="list-unstyled">
-									<li>
-										<a href="#!">Link 1</a>
-									</li>
-									<li>
-										<a href="#!">Link 2</a>
-									</li>
-									<li>
-										<a href="#!">Link 3</a>
-									</li>
-									<li>
-										<a href="#!">Link 4</a>
-									</li>
-								</ul>
-
-							</div>
-							<!-- Grid column -->
-
-						</div>
-						<!-- Grid row -->
-
-					</div>
-					<!-- Footer Links -->
-
-					<!-- Copyright -->
-					<div class="footer-copyright text-center py-3">© 2020 Copyright:
-						<a href="https://mdbootstrap.com/">
-							MDBootstrap.com</a>
-					</div>
-					<!-- Copyright -->
-
-				</footer>
-				<!-- Footer -->
-			</footer>
-		{% endblock %}
-		{% block javascripts %}
-			<script src="{{ asset('js/main.js')}}"></script>
 			{# JS 4 Boostrap #}
-			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 			<!-- JQuery -->
@@ -283,6 +341,13 @@
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 			<!-- MDB core JavaScript -->
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+			{# not working #}
+			<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.css"/>
+
+			<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.js"></script>
+
+
 		{% endblock %}
 	</body>
 </html></body></html>

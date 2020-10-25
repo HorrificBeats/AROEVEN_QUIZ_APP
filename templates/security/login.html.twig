@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Login!
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<h1 class="h3 mb-3 font-weight-normal">Welcome back!</h1>
 		<label for="inputUsername">Username</label>
 		<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
 		<label for="inputPassword">Password</label>
@@ -30,16 +30,16 @@
 		</div>
 
 		<div class='text-center'>
-			<button class="btn btn-lg btn-primary" type="submit">
+			<button class="btn btn-lg btn-light" type="submit">
 				Sign in
 			</button>
 
-
-			<p>
+			<br>
+			<h7>
 				If you dont have an account, please register
-				<a href="{{ path('home') }}">
+				<a class ="text-warning" href="{{ path('home') }}">
 					here</a>.
-			</p>
+			</h7>
 		</div>
 	</form>
 {% endblock %}
