@@ -9,8 +9,15 @@
 	{% endfor %}
 	<div>
 		<div class='container mt-4 mb-4'>
-			<div style=' background-color: #f0f8ff; padding:15px;' class='rounded {% if not app.user %} col-lg-5 {% else %} col-lg-12 {% endif %}'>
-				<h1>WELCOME!</h1>
+			<div style=' background-color: #f0f8ff; {# padding:15px #};' class='hoverable p-3 rounded {% if not app.user %} col-lg-5 {% else %} col-lg-12 {% endif %}'>
+				<h1 class='animate__animated animate__bounce text-bold'>WELCOME!</h1>
+				{# <h1 class="ml1">
+					<span class="text-wrapper">
+						<span class="line line1"></span>
+						<span class="letters">WELCOME!</span>
+						<span class="line line2"></span>
+					</span>
+				</h1> #}
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
 			</div>
 

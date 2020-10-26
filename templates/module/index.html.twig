@@ -4,25 +4,60 @@
 {% endblock %}
 
 {% block body %}
-	<div class='container col-lg-9'>
-		{# <div class='text-center'> #}
-		<div>
+<h1> Type 1</h1>
+	<div class='container col-lg-7'>
+		<div class='card-deck'>
 			{% for module in modules %}
 				<a
 					href="{{ path('module', {'id' : module.id})}}">
 					{# Culoare dinamica in functie de ID #}
 					{% if module.id is odd %}
-						<div style='background-color:red; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5 col-lg-6 p-2'>
+						<div style='background-color:red;' class='moduleCard card m-1 col-lg-12 p-3 mr-5 hoverable'>
 							{{module.title}}
 						</div>
 					{% else %}
-						<div style='background-color:white; float:left; width:200px; height:200px; text-align:center; margin-left: 10px;' class='card m-5 col-lg-6 p-2'>
+						<div style='background-color:white' class='moduleCard card m-1 col-lg-12 p-3 mr-5 hoverable'>
 							{{module.title}}
 						</div>
 					{% endif %}
 				</a>
 			{% endfor %}
 		</div>
-		{# </div> #}
 	</div>
+	<hr> 
+	<h1> Type 2</h1>
+	<div class="card-deck col-lg-9 m-auto">
+		<div class="card m-3 hoverable bg-dark text-white animate__animated animate__swing">
+			<a href='#'>
+				<img src="https://media.gettyimages.com/photos/bullying-in-the-corridor-picture-id911026652?s=612x612" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title text-white">MODULE A</h5>
+					<p class="card-text text-white">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+				</div>
+			</a>
+		</div>
+		<div class="card  m-3 hoverable bg-dark text-white animate__animated animate__swing">
+			<a href='#'>
+				<img src="https://i.redd.it/qp9q0ol1u6ly.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title text-white">MODULE B</h5>
+					<p class="card-text text-white">This card has supporting text below as a natural lead-in to additional content.</p>
+				</div>
+			</a>
+		</div>
+	</div>
+	<hr>
+	<h1> Type 3</h1>
+
+
+	<style>
+		.moduleCard {
+			{
+				# float: center; #
+			}
+			width: 250px;
+			height: 250px;
+			text-align: center;
+		}
+	</style>
 {% endblock %}

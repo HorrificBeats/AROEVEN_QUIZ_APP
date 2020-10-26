@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-	Hello !  {# TBDeleted #}
+	Hello !
+	{# TBDeleted #}
 {% endblock %}
 
 {% block body %}
@@ -10,7 +11,7 @@
 	<h1>Quiz
 		{# {{quiz_id}} #}
 	</h1>
-	<div style='background-color:#cee5ff; padding:20px' class='container rounded col-lg-10'>
+	<div style='background-color:#cee5ff; padding:20px' class='container rounded col-lg-10 animate__animated animate__fadeIn'>
 		<div style='background-color:#f0f8ff' class='rounded p-1'>
 			<h2>
 				{{questions.qnumber}}.
@@ -22,12 +23,38 @@
 		{# HIDDEN #}
 		{{ form_widget (quizForm.quiz) }}
 		{# HIDDEN #}
-		{{ form_widget (quizForm.answer, {'attr': {'class': 'quizAnswers p-3'}}) }}
-		<div class='text-center'>
-			{{ form_widget (quizForm.save, {'attr': {'class': 'btn btn-danger mb-0'}}) }}
+		{{ form_widget (quizForm.answer, {'attr': {
+			'class': 'quizAnswers p-3 answerRadio',
+			'onclick':"RadioValidator();"
+		}}) }}
+		<div id='submitBtnContainer' class='text-center' onClick="loadingButton()">
+			
+			{{ form_widget (quizForm.save, {'attr': {
+				'class': 'btn btn-dark mb-0 ',
+				'style': 'display:none'
+			}}) }}
+			<button id='movingButton' type="submit" class ="btn btn-dark mb-0" >
+				<span id='Hspinner' class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none "></span> 
+				<div id='magicText' style='display:block'>NEXT QUESTION </div>
+			</button>
 		</div>
 		{{ form_end (quizForm) }}
 	</div>
 
+	<style>
+		.form-check {
+			padding: 5px;
+			border-radius: 25px;
+		}
+		.form-check:hover {
+			background-color: white;
+			transition-duration: 0.2s;
+			transition-timing-function: ease;
+			transition-delay: 2s, 4ms;
+		}
+		input[type=checkbox]:checked + .form-check {
+			background-color: white;
+		}
+	</style>
 
 {% endblock %}

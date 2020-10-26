@@ -8,14 +8,13 @@
 	<div
 		class='container col-lg-10'>
 		{# DYNAMIC TITLE #}
-		<h1>
+		<h1 class='text-bold text-white'>
 			<i>{{module[id-1].title}}</i>
 		</h1>
 
 		{# Each MODULE has different colors  #}
 		{% if id is odd %}
-			<div
-				style='background-color: #ff7373' class='rounded'>
+			<div id='SlidesContainer' style='background-color: #ff7373' class='rounded animated bounce'>
 				{# MODULE A #}
 				{% for slide in slides %}
 					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
@@ -35,8 +34,7 @@
 				{% endfor %}
 			</div>
 		{% else %}
-			<div
-				style='background-color: #fff5eb' class='rounded'>
+			<div style='background-color: #fff5eb' class='rounded'>
 				{# MODULE B #}
 				{% for slide in slides %}
 					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 6 ? 'style="display:"' : 'style="display:none"' }}>
