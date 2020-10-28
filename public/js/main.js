@@ -21,27 +21,43 @@ function showSlide(elementID) {
   elem.style.display = "block";
 }
 
-/* $(document).ready(function () {
-  console.log("ready!");
-  $("#table_id").DataTable();
-  alert("Ready!");
-});
- */
-
-/* DATA TABLES ?? */
-window.onload = function () {
-  if (window.jQuery) {
-    // jQuery is loaded
-    //alert("Yeah!");
-    $("#table_id").DataTable();
-  } else {
-    // jQuery is not loaded
-    alert("Doesn't Work");
-  }
-};
+/* DATA TABLES */
 
 $(document).ready(function () {
-  $("#table_id").DataTable();
+  $("#table_id").DataTable({
+    //Disable Search
+    searching: false,
+    //Enable reponsive + Breakpoints
+    responsive: true,
+    /* responsive: {
+      breakpoints: [
+        { name: "desktop", width: 1200 },
+        { name: "tablet", width: 992 },
+        { name: "fablet", width: 768 },
+        { name: "phone", width: 576 }
+      ],
+    }, */
+    //Only show Prev/Next btns
+    pagingType: "simple",
+    //Default pageLenght
+    pageLength: 15,
+
+    //paging: false,
+    orderClasses: true, //Highlight Ordered Column
+    select: true,
+    columnDefs: [
+      { responsivePriority: 1, targets: 0 },
+      { responsivePriority: 2, targets: -1 }
+  ]
+  });
+
+  $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+    $($.fn.dataTable.tables(true))
+      .DataTable()
+      .columns.adjust()
+      .responsive.recalc();
+      
+  });
 });
 
 /* MOVING LETTERS (TBDeleted) */
@@ -88,14 +104,34 @@ window.onload = function () {
 
 /* Adding loader on QUIZ Button */
 function loadingButton() {
-  //if (document.getElementsByClassName("form-check-input").checked) {
-    //document.getElementById("Hspinner").style.display = "block";
-    //document.getElementById("magicText").style.display = "none";
-    document.getElementById('movingButton').classList.add('animate__animated', 'animate__shakeX');;
+  document.getElementById("movingButton").classList.add("animate__animated", "animate__swing");
+  //if (document.getElementsByClassName("form-check-input").checked == true) {
+  //if (document.querySelectorAll('[id^="quiz_form_answer_"]').checked) {
+  //document.getElementById("Hspinner").style.display = "block";
+  //document.getElementById("magicText").style.display = "none";
+  //} else {
+  //document.getElementById('movingButton').classList.add('animate__animated', 'animate__shakeX');
   //}
-};
+}
+
+function RadioValidator() {}
+
+/* function display() {  
+  var checkRadio = document.querySelector( 
+      'input[name="quiz_form[answer]"]:checked'); 
+    
+  if(checkRadio != null) { 
+      //document.getElementById("disp").innerHTML = checkRadio.value + " radio button checked"; 
+      document.getElementById('movingButton').classList.add('animate__animated', 'animate__shakeX');
+  } 
+  else { 
+      //document.getElementById("disp").innerHTML = "No one selected"; 
+      document.getElementById("Hspinner").style.display = "block";
+      document.getElementById("magicText").style.display = "none";
+  } 
+}  */
 
 
-function RadioValidator() {
-
+function logoAnimation() {
+  document.getElementById("logo").classList.add("animate__animated", "animate__swing");
 }
