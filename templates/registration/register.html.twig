@@ -7,9 +7,9 @@
 	{% for flashError in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
-	<div>
-		<div class='container mt-4 mb-4'>
-			<div style=' background-color: #f0f8ff; {# padding:15px #};' class='hoverable p-3 rounded {% if not app.user %} col-lg-5 {% else %} col-lg-12 {% endif %}'>
+	<div class='container'>
+		<div class='mt-2 mb-2 row d-flex justify-content-center'>
+			<div style='background-color: #f0f8ff' class='m-4 hoverable p-3 rounded {% if not app.user %} col-lg-6 {% else %} col-lg-12 {% endif %}'>
 				<h1 class='animate__animated animate__bounce text-bold'> WELCOME! </h1>
 				{# <h1 class="ml1">
 					<span class="text-wrapper">
@@ -22,30 +22,36 @@
 			</div>
 
 			{# SIGN UP Shows Only for non-loggedIn users #}
+			{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
 			{% if not app.user %}
-				<div style='float:right; background-color: #CADBD9; padding:15px;' class='rounded col-lg-6'>
-					<h2>SIGN UP HERE</h2>
+			<div style='padding:15px;' class='m-4 rounded col-lg-4 gradient hoverable'>
+				<h2>SIGN UP</h2>
 
-					{% form_theme registrationForm 'bootstrap_4_horizontal_layout.html.twig' %}
+				
 
-					{{ form_start(registrationForm) }}
-					{% block form_label_errors %}{% endblock %}
-
+				{{ form_start(registrationForm) }}
+				{% block form_label_errors %}{% endblock %}
+				<div class='form-group'>
 					{{ form_row(registrationForm.username) }}
-					{{ form_row(registrationForm.plainPassword) }}
-					{{ form_row(registrationForm.birthdate) }}
-					{{ form_row(registrationForm.agreeTerms) }}
-
-					<div class='text-center'>
-						<button type="submit" class="btn btn-primary">Register</button>
-					</div>
-					{{ form_end(registrationForm) }}
-
 				</div>
+				{# {{ form_label(registrationForm.username, null, {'attr': {'class':'' } }) }}
+				{{ form_widget(registrationForm.username, { 'attr': {'class': 'foo'} }) }} #}
+				
+				{{ form_row(registrationForm.plainPassword) }}
+				
+				{{ form_row(registrationForm.birthdate) }}
+				{{ form_row(registrationForm.agreeTerms) }}
+				
+
+
+				<div class='text-center'>
+					<button type="submit" class="btn btn-dark">Register</button>
+				</div>
+				{{ form_end(registrationForm) }}
+			</div>
 			{% endif %}
 		</div>
-		<div
-			class='text-center animate__animated animate__swing'>
+		<div class='text-center animate__animated animate__swing'>
 			{# 1/2 Din protectie; cealalta jumatate este in CONTROLLER #}
 			{% if app.user %}
 				<a href='{{ path('tutorial') }}'>

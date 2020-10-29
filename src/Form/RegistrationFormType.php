@@ -22,10 +22,10 @@ class RegistrationFormType extends AbstractType
         $builder
             /* ->add('username') */
             ->add('username', null, [
-                'label' => 'Username',
+                /* 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Contact person name'
-                ],
+                    'placeholder' => 'Username'
+                ], */
             ]) 
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -34,6 +34,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                'label' => false,
+                'required' => false,
+                'attr' => ['style' => 'display:none']
             ])
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
@@ -41,7 +44,7 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'second_options' => ['label' => 'Confirm Password'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -54,6 +57,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     
                 ],
+
             ])
             ->add('birthdate', BirthdayType::class)
         ;
