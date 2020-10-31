@@ -42,6 +42,16 @@ class ModuleController extends AbstractController
             "id_module" => $id    
             ]);
 
+        dump($module, $id, $slides);
+        /* Var Dictionary 
+        $module = obj. w/ 1st lvl values, excluding FKs
+        $id = module.ID; inputed by URL;
+        $slides = obj. 
+        
+        
+        */
+
+
         return $this->render('module/module.html.twig', array(
             'controller_name' => 'ModuleController',
             'module' => $module,

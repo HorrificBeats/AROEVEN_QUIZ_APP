@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!
+{% block title %} Wawawewa!
 {% endblock %}
 
 {% block body %}
-	<div>
-		{# {{ dump() }} #}
+
 
 
 		{# RESULTS TABLE #}
@@ -43,9 +42,9 @@
 					<thead>
 						<tr class='modulesAll'>
 							<th data-priority="1">MODULES</th>
-							<th data-priority="3">N.S.</th>
-							<th data-priority="2">Slides</th>
-							<th data-priority="4">Content Type</th>
+							<th data-priority="1">N.S.</th>
+							<th data-priority="1">Slides</th>
+							<th data-priority="5">Content Type</th>
 						</tr>
 					</thead>
 					{# Trec prin SLIDE ca sa ajung la MODULE #}
@@ -69,9 +68,9 @@
 
 		{# QUIZZEZ TABLE #}
 		{% if app.request.attributes.get('_route') == 'admin_quizzes' %}
-			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-primary hoverable'>
+			<div class='container responsive rounded mt-5 pt-3 col-lg-10 hoverable bg-white'>
 				<table id="table_id" datatables='' class="display p-1 responsive wrap" style="width:100%">
-					<thead>
+					<thead >
 						<tr>
 							<th data-priority="3">Quiz id</th>
 							<th data-priority="4">Q_N</th>
@@ -183,5 +182,5 @@
 																								background-color: #ffffff;
 																							}
 																						</style> #}
-	</div>
+
 {% endblock %}

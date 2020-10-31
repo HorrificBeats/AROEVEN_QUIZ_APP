@@ -14,11 +14,20 @@ function showSlide(elementID) {
     slides[i].classList.add("animate__animated", "animate__fadeIn");
 
     /* TODO: show Button on LAST Slide */
-    if (i == slides.lenght) {
-      document.getElementById("SlidesContainer").style.display = "none";
-    }
+    
+
+    
   }
+ 
+  //document.getElementById("quizPost").style.display="block";
+
+  
   elem.style.display = "block";
+  /* if ( === slides.length) {
+      //document.getElementById("nextButton").style.display="none";
+      //document.getElementById("moduleB").style.display="block";
+      document.getElementById("quizPost").style.display="block";
+  } */
 }
 
 /* DATA TABLES */
@@ -135,3 +144,4 @@ function RadioValidator() {}
 function logoAnimation() {
   document.getElementById("logo").classList.add("animate__animated", "animate__swing");
 }
+

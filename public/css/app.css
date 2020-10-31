@@ -61,18 +61,49 @@
 /* =============================== CSS Tricks - Gradient =============================== */
 .gradient {
   /* can be treated like a fallback */
-  background-color: black;
+  background-color: #AA66CC;
 
   /* will be "on top", if browser supports it */
   background-image: linear-gradient(
     #f4bde2,
     #AA66CC
   );
-
-  /* these will reset other properties, like background-position, but it does know what you mean */
-  /* background: red;
-  background: linear-gradient(rgb(221, 0, 255), rgba(255, 255, 0, 0.776)); */
 }
+
+/* =============================== Animated Gradient =============================== */
+/* https://www.gradient-animator.com */
+
+.animatedGradient {
+  background-image: linear-gradient(180deg, #f4bde2, #aa66cc, #8aa7ff, #7972d3);
+    background-size: 5% 150%;
+
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    -o-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+@-o-keyframes AnimationName {
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+@keyframes AnimationName { 
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+
+/* =============================== //Animated Gradient =============================== */
 
 .form-control {
   width:5%;
@@ -96,19 +127,111 @@
   height: 50px;
 } */
 html { height: 100%; }
-body {
+/* #body {
     min-height:100%; 
     position:relative; 
-    padding-bottom:[footer-height] 
+    margin-bottom:[footer-height] 
 }
 .footer { 
     position: absolute; 
-    left: 0 ; right: 0; bottom: 45; 
+    left: 0 ; right: 0; bottom: 80; 
     height:[footer-height];
     bottom: 0; 
-}
+} */
 
 a:hover {
   color: #FDBB34;
   transition-duration: 1;
 }
+
+/* #25 Pure CSS Button with Ring Indicator */
+  html, body {
+    height: 100%;
+  }
+
+  /* .wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+
+  .button {
+    min-width: 270px;
+    min-height: 60px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    color: #ffffff;
+    background: #AA66CC;
+  background: #2f2a32;
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px #F2BB34;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    padding: 10px;
+    }
+
+  button::before {
+  content: '';
+    border-radius: 1000px;
+    min-width: calc(300px + 12px);
+    min-height: calc(60px + 12px);
+    border: 6px solid #F2BB34;
+    box-shadow: 0 0 60px #AA66CC;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
+  }
+
+  .button:hover, .button:focus {
+    color: #F2BB34;
+    transform: translateY(-6px);
+  }
+
+  .button:hover::before, .button:focus::before {
+    opacity: 1;
+  }
+
+  .button::after {
+    content: '';
+    width: 30px; height: 30px;
+    border-radius: 100%;
+    border: 6px solid #F2BB34;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+  }
+
+  .button:hover::after, .button:focus::after {
+    animation: none;
+    display: none;
+  }
+
+  @keyframes ring {
+    0% {
+      width: 30px;
+      height: 30px;
+      opacity: 1;
+    }
+    100% {
+      width: 300px;
+      height: 300px;
+      opacity: 0;
+    }
+  }
+/* CSS Button END */
+
+
+

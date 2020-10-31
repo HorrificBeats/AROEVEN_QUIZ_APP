@@ -24,6 +24,8 @@
 				<link rel="stylesheet" href="{{ asset('css/app.css')}}">
 			{# BOOTSTRAP #}
 				<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+			{# HOVER EFFECTS #}
+				<link href="{{ asset('css/hover.css')}}" rel="stylesheet" media="all">
 			
 			
 
@@ -58,7 +60,7 @@
 		{% endblock %}
 
 	</head>
-	<body class='content' id='main' style=' background-image: url("{{asset('image/background.jpg')}}"); margin-bottom:250px; background-size: 35%;'>
+	<body class='content z-index-0' id='main' style=' background-image: url("{{asset('image/background.jpg')}}"); margin-bottom:250px; background-size: 35%;'>
 		{# ================================ DEPRECATED ======================================== #}
 		{# OLD NavBar #}
 			<header style="display:none"> <nav>
@@ -91,14 +93,14 @@
 						</li>
 					{% else %}
 						<li class="rightli">
-							<a style="color:blue" href="{{ path('app_login') }}">LOGIN</a>
+							<a class='hvr-underline-from-center' style="color:blue" href="{{ path('app_login') }}">LOGIN</a>
 						</li>
 					{% endif %}
 
 					{# ONLY if user == ADMIN #}
 					{% if is_granted('ROLE_ADMIN') %}
 						<li class="rightli">
-							<a style='background-color: black; color:white; padding:0px 4px 0px 4px;' href="{{ path('admin_panel') }}">ADMIN</a>
+							<a class='hvr-underline-from-center' style='background-color: black; color:white; padding:0px 4px 0px 4px;' href="{{ path('admin_panel') }}">ADMIN</a>
 						</li>
 					{% endif %}
 				</ul>
@@ -155,7 +157,7 @@
 		{# =================================== IN USE ===================================== #}
 		{# <!--BOOTSTRAP NAVBAR --> #}
 		<div id='WHOLEnav'>
-			<nav class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1 rounded-bottom">
+			<nav class=" mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1 rounded-bottom">
 				{# LOGO BTN #}
 				<a id="logo" class="navbar-brand mt-n2 pt-1" href="{{path('home')}}" onclick="logoAnimation();">
 					<svg  width="1.3em" height="1.3em" viewbox="0 0 16 16" class="bi bi-alarm-fill text-dark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -168,31 +170,30 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-					<ul
-						class="navbar-nav mr-auto">
+					<ul class="navbar-nav mr-auto">
 
 						{# HOME #}
 						<li class="nav-item {% if app.request.attributes.get('_route') == 'home' %} active {% endif %}">
-							<a class="nav-link" href="{{path('home')}}">Home
+							<a class="nav-link hvr-underline-from-center" href="{{path('home')}}">Home
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
 
 						{# TUTORIAL #}
 						<li class="nav-item {% if app.request.attributes.get('_route') == 'tutorial' %} active {% endif %}">
-							<a class="nav-link" href="{{path('tutorial')}}">Tutorial</a>
+							<a class="nav-link hvr-underline-from-center" href="{{path('tutorial')}}">Tutorial</a>
 						</li>
 
 						{# MODULES #}
 						<li class="nav-item {% if app.request.attributes.get('_route') == 'modules_page' %} active {% endif %}">
-							<a class="nav-link" href="{{path('modules_page')}}">Modules</a>
+							<a class="nav-link hvr-underline-from-center" href="{{path('modules_page')}}">Modules</a>
 						</li>
 
 
 						{# ONLY FOR ADMIN #}
 						{% if is_granted('ROLE_ADMIN') %}
 							<li class="nav-item {% if app.request.attributes.get('_route') == 'admin_results' %} active {% endif %}">
-								<a class="nav-link" href="{{path('admin_results')}}">ADMIN</a>
+								<a class="nav-link hvr-underline-from-center" href="{{path('admin_results')}}">ADMIN</a>
 							</li>
 						{% endif %}
 					</ul>
@@ -201,11 +202,11 @@
 					<ul class="navbar-nav ml-auto nav-flex-icons">
 						{% if app.user %}
 							<li class="nav-item mr-2">
-								<a class="nav-link" href="{{path('app_logout')}}">LOGOUT</a>
+								<a class="nav-link hvr-underline-from-center" href="{{path('app_logout')}}">LOGOUT</a>
 							</li>
 						{% else %}
 							<li class="nav-item">
-								<a id='loginBTN' class=" nav-link  {% if app.request.attributes.get('_route') == 'app_login' %} active {% endif %}" href="{{path('app_login')}}">LOGIN</a>
+								<a id='loginBTN' class="hvr-underline-from-center nav-link  {% if app.request.attributes.get('_route') == 'app_login' %} active {% endif %}" href="{{path('app_login')}}">LOGIN</a>
 							</li>
 						{% endif %}
 					</ul>
@@ -224,20 +225,26 @@
 			</nav>
 			{# ADMIN NAVBAR #}
 			{% if app.request.attributes.get('_route') starts with 'admin_' %}
-				<div class="btn-group float-right" role="group">
-					<a href="{{path('admin_results')}}" class="btn btn-secondary btn-md {% if app.request.attributes.get('_route') == 'admin_results' %} active {% endif %}">RESULTS
+				<div class="btn-group float-right col-xl-3 col-lg-5 col-md-6 col-sm-12 col-xs-12" role="group">
+					<a href="{{path('admin_results')}}" class=" text-nowrap row btn btn-secondary btn-md {% if app.request.attributes.get('_route') == 'admin_results' %} active {% endif %}">RESULTS
 					</a>
 					<br>
-					<a href="{{path('admin_modules')}}" class="btn btn-secondary  btn-md {% if app.request.attributes.get('_route') == 'admin_modules' %} active {% endif %}">MODULES
+					<a href="{{path('admin_modules')}}" class=" text-nowrap row btn btn-secondary  btn-md {% if app.request.attributes.get('_route') == 'admin_modules' %} active {% endif %}">MODULES
 					</a>
 					<br>
-					<a href="{{path('admin_quizzes')}}" class="btn btn-secondary  btn-md {% if app.request.attributes.get('_route') == 'admin_quizzes' %} active {% endif %}">QUIZ
+					<a href="{{path('admin_quizzes')}}" class=" text-nowrap row btn btn-secondary  btn-md {% if app.request.attributes.get('_route') == 'admin_quizzes' %} active {% endif %}">QUIZ
 					</a>
+					
 				</div>
 			{% endif %}
 			{% if app.request.attributes.get('_route') == 'admin_results' %}
-				<div class=" row mr-2 btn-group  float-right animate__animated animate__flipInX" role="group">
-					<a href="{{path('export')}}" class="col-lg-1 col-md-12 btn btn-light btn-md text-body font-weight-bold col-lg-12">
+				<div class="d-none d-md-block row mr-2 btn-group  float-right animate__animated animate__flipInX" role="group">
+					<a href="{{path('export')}}" class=" btn btn-light btn-md text-body font-weight-bold col-lg-12">
+						EXPORT
+					</a>
+				</div>
+				<div class='d-block d-md-none col-12'>
+					<a href="{{path('export')}}" class=" btn btn-dark btn-md text-white font-weight-bold col-lg-12  animate__animated animate__flipInX">
 						EXPORT
 					</a>
 				</div>
@@ -248,81 +255,46 @@
 																																														
 		{##}
 
-		{# ====================================================== #}
-		<div class='container'>
+		{# ======================== MAIN ======================== #}
+		<div id='mainContent' class='container' {# style='margin-bottom:450px; #}'>
 		{% block body %}
 		{% endblock %}
-		<div>
+		</div>
 
-		{# ====================================================== #}
+		{# ======================= FOOTER ======================= #}
 			{% block footer %}
 			<br>
 			<br>
-			<footer class='container {# fixed-bottom #} footer'> 
+			<footer id='miniFoot'class='fixed-bottom {# mb-n5 #} d-block d-md-none text-white secondary-color rounded'>
+				{# d-md-none CLASS to HIDE elements #}
+				<div class="footer-copyright text-center py-2 mb-0">© 2020 Copyright:
+					<a id='logo' href="http://horiagg.alwaysdata.net">
+						HorrificDev
+					</a>
+				</div>
+			</footer>
+			<br>
+			<br>
+			<br>
+			
+			<footer class='mb-n1 container fixed-bottom footer d-none d-md-block'> 
 				<!-- Footer -->
 				<footer class="page-footer font-small secondary-color pt-2 rounded-top shadow">
 
 					<!-- Footer Links -->
-					<div class="container-fluid text-center text-md-left">
+					<div class="container-fluid text-center">
 
 						<!-- Grid row -->
 						<div class="row">
-
-							<!-- Grid column -->
-							<div class="col-md-2 mt-md-0 mt-3">
-
-								<!-- Content -->
-								<h5 class="text-uppercase">Contact</h5>
-								<p></p>
-								{# <p> • Tel: 06 20 123 456</p> #}
-
-							</div>
-							<!-- Grid column -->
-
-
-							<!-- Grid column -->
-								<div class="col-md-3 mb-md-0"> <!-- Links -->
-								<h5>
-									📞 06 20 123 456</h5>
-
-								{# <ul class="list-unstyled">
-																																																																																																	<li>
-																																																																																																		<a href="#!">Link 1</a>
-																																																																																																	</li>
-																																																																																																	<li>
-																																																																																																		<a href="#!">Link 2</a>
-																																																																																																	</li>
-																																																																																																	<li>
-																																																																																																		<a href="#!">Link 3</a>
-																																																																																																	</li>
-																																																																																																	<li>
-																																																																																																		<a href="#!">Link 4</a>
-																																																																																																	</li>
-																																																																																																</ul> #}
-
-							</div>
-							<!-- Grid column -->
-
-							<!-- Grid column -->
-							<div class="col-md-4 mb-md-0">
-
-								<!-- Links -->
-								<h5>
-									<a href='adress@company.com'>
-										✉️ adress@company.com</a>
-								</h5>
-
-							</div>
-							<!-- Grid column -->
-							<!-- Grid column -->
-							<div class="col-md-3 mb-md-0">
-
-								<!-- Links -->
-								<a href='google.com' class='hoverable'>
-									<h5>
-										🌍 www.website.com</h5>
-								</a>
-
+							<div class="collapse col-12" id="collapseExample">
+								<div class="">
+									{# Collapsable content here #}
+									<div class='row'>
+										<a class='col-4 p-0' ><h6 class='text-center'>📞 06 20 123 456</h6></a>
+										<a class='col-4 p-0' href='adress@company.com'><h6 class='text-center'>✉️ adress@company.com</h6></a>
+										<a class='col-4 p-0' href='google.com' class='hoverable'><h6  class='text-center'>🌍 www.website.com</h6></a>
+									</div>
+								</div>
 							</div>
 							<!-- Grid column -->
 
@@ -333,9 +305,13 @@
 					<!-- Footer Links -->
 
 					<!-- Copyright -->
-					<div class="footer-copyright text-center py-3">© 2020 Copyright:
-						<a id='logo' href="http://horiagg.alwaysdata.net">
+					<div class="footer-copyright text-center pt-3 pb-2">© 2020 Copyright:
+						<a class='' id='logo' href="http://horiagg.alwaysdata.net">
 							HorrificDev
+						</a>
+						{# Collapse BTN #}
+						<a style='margin-right:-25%' class="btn btn-sm btn-secondary rounded float-left position-static mt-n2" data-toggle="collapse" href="#collapseExample" {# role="button" #} aria-expanded="false" aria-controls="collapseExample">
+							Contact
 						</a>
 					</div>
 					<!-- Copyright -->
@@ -343,6 +319,8 @@
 				</footer>
 				<!-- Footer -->
 			</footer>
+
+			
 		{% endblock %}
 		{# ====================================================== #}
 		{% block javascripts %}

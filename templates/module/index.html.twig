@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ModuleController!
+{% block title %}Wawawewa!
 {% endblock %}
 
 {% block body %}
-<h1> Type 1</h1>
-	<div class='container col-lg-7'>
+	<h1 class='text-white'>
+		Type 1 [hidden] </h1>
+	<div class='container col-lg-12 d-none'>
 		<div class='card-deck'>
 			{% for module in modules %}
-				<a
-					href="{{ path('module', {'id' : module.id})}}">
-					{# Culoare dinamica in functie de ID #}
+				<div class="card m-3 hoverable bg-dark text-white hvr-wobble-vertical">
+					<a href="{{ path('module', {'id' : module.id})}}">
+						<img src="https://media.gettyimages.com/photos/bullying-in-the-corridor-picture-id911026652?s=612x612" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-white">{{module.title}}</h5>
+							<p class="card-text text-white">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+						</div>
+					</a>
+				</div>
+				<a href="{{ path('module', {'id' : module.id})}}">
+					Culoare dinamica in functie de ID
 					{% if module.id is odd %}
 						<div style='background-color:red;' class='moduleCard card m-1 col-lg-12 p-3 mr-5 hoverable'>
 							{{module.title}}
@@ -24,11 +33,12 @@
 			{% endfor %}
 		</div>
 	</div>
-	<hr> 
-	<h1> Type 2</h1>
-	<div class="card-deck col-lg-9 m-auto">
-		<div class="card m-3 hoverable bg-dark text-white animate__animated animate__swing">
-			<a href='#'>
+	<hr>
+	<h1>
+		Type 2</h1>
+	<div class="card-deck col-lg-12 m-auto animate__animated animate__bounceInLeft">
+		<div class="card m-3 hoverable bg-dark text-white hvr-wobble-vertical">
+			<a href="{{ path('module', {'id' : 1})}}">
 				<img src="https://media.gettyimages.com/photos/bullying-in-the-corridor-picture-id911026652?s=612x612" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title text-white">MODULE A</h5>
@@ -36,8 +46,8 @@
 				</div>
 			</a>
 		</div>
-		<div class="card  m-3 hoverable bg-dark text-white animate__animated animate__swing">
-			<a href='#'>
+		<div class="card  m-3 hoverable bg-dark text-white hvr-wobble-vertical animanted pulse">
+			<a href="{{ path('module', {'id' : 2})}}">
 				<img src="https://i.redd.it/qp9q0ol1u6ly.jpg" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title text-white">MODULE B</h5>
@@ -45,9 +55,16 @@
 				</div>
 			</a>
 		</div>
+		<div class="card  m-3 hoverable bg-dark text-white hvr-wobble-vertical animanted pulse">
+			<a href='#'>
+				<img src="https://researchdigest.files.wordpress.com/2017/02/thinkstockphotos-465387796.jpg?w=845" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title text-white">MODULE C</h5>
+					<p class="card-text text-white">Coming soon!</p>
+				</div>
+			</a>
+		</div>
 	</div>
-	<hr>
-	<h1> Type 3</h1>
 
 
 	<style>

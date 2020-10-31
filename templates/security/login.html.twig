@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<form method="post" class='container col-lg-4 mt-5 p-5 rounded hoverable' style="background-color:#aa66cc; color:white">
+	<form method="post" class='container col-lg-4 col-md-6 col-sm-8 mt-5 p-5 rounded hoverable' style="background-color:#aa66cc; color:white">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}

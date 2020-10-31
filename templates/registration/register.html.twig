@@ -8,7 +8,7 @@
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
 	<div class='container'>
-		<div class='mt-2 mb-2 row d-flex justify-content-center'>
+		<div class='mt-2 mb-2 row justify-content-center'>
 			<div style='background-color: #f0f8ff' class='m-4 hoverable p-3 rounded {% if not app.user %} col-lg-6 {% else %} col-lg-12 {% endif %}'>
 				<h1 class='animate__animated animate__bounce text-bold'> WELCOME! </h1>
 				{# <h1 class="ml1">
@@ -24,8 +24,8 @@
 			{# SIGN UP Shows Only for non-loggedIn users #}
 			{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
 			{% if not app.user %}
-			<div style='padding:15px;' class='m-4 rounded col-lg-4 gradient hoverable'>
-				<h2>SIGN UP</h2>
+			<div style='padding:15px;' class='gradient m-4 rounded col-lg-4 hoverable text-bold text-black'>
+				<h1><b>SIGN UP</b></h1>
 
 				
 

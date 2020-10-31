@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Hello ModuleController!
-	{# TBDeleted #}
+{% block title %} Wawawewa!
+	{# TBDted #}
 {% endblock %}
 
 {% block body %}
@@ -37,7 +37,7 @@
 			<div style='background-color: #fff5eb;' class='rounded'>
 				{# MODULE B #}
 				{% for slide in slides %}
-					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 6 ? 'style="display:"' : 'style="display:none"' }}>
+					<div id='slide{{slide.id}}' class='slideN{{slide.getSlideNumber}} slide p-4' {{ slide.id == 6 ? 'style="display:"' : 'style="display:none"' }}>
 						<h3 style='text-align:center'>
 							[
 							{{slide.getSlideNumber}}
@@ -48,13 +48,16 @@
 							{# Ca sa nu adauge ghilimele degeaba #}
 						</div>
 						<br>
-						<div class='text-center'>
+						<div id='nextButton' class='text-center' style='display:'>
 							<button onclick='showSlide("slide{{slide.id+1}}")' class='text-center mt-3 btn btn-secondary'>
 								NEXT SLIDE
 							</button>
 						</div>
 						<br>
 					</div>
+					{% if slides|length is same as (slide.getSlideNumber) %}
+						<h1>It Works Mothafucka!</h1>
+					{% endif %}
 				{% endfor %}
 			</div>
 		{% endif %}
@@ -64,14 +67,14 @@
 		<hr>
 		{% if module[id-1] == module[0] %}
 			{# IF I'm already on the 1st Module, I'll go to the next one #}
-			<a href="{{ path('module', {'id' : 2}) }}">
+			<a id='moduleB' href="{{ path('module', {'id' : 2}) }}">
 				<button class='btn btn-danger'>
 					Go To MODULE B
 				</button>
 			</a>
 		{% elseif module[id-1] == module[1] %}
 			{# IF I'm on the 2nd Module, I'll go to the POST-QUIZ #}
-			<a href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
+			<a id='quizPost' style='display: ' href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
 				<button class='btn btn-danger'>
 					Go To Quiz-POST
 				</button>
@@ -79,4 +82,6 @@
 		{% endif %}
 
 	</div>
+
+	
 {% endblock %}
