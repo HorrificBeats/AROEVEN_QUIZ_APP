@@ -27,7 +27,7 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Username'
                 ], */
             ]) 
-            ->add('agreeTerms', CheckboxType::class, [
+            /* ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -36,8 +36,8 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => false,
                 'required' => false,
-                'attr' => ['style' => 'display:none']
-            ])
+                'attr' => ['style' => 'display:']
+            ]) */
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

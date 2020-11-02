@@ -7,13 +7,12 @@
 {% block body %}
 	{# {{ dump() }} #}
 
-	<div class="progress mb-4">
-		<div id='progressBar' class="progress-bar progress-bar-striped progress-bar animate__animated animate__slideInLeft" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+	<div class="progress mb-4" >
+		<div id='progressBar' class="bg-secondary progress-bar progress-bar-striped progress-bar animate__animated animate__slideInLeft " role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
 	<style>
-		{
-			# For 5 Quiz-Questions #
-		}
+		{# For 5 Quiz-Questions #}
+
 		{% if question_id == 1 %}
 			#progressBar {
 				width: 1%;
@@ -36,7 +35,7 @@
 			}
 		{% endif %}
 	</style>
-	<h1 class='mb-4'>Quiz
+	<h1 class='mb-4 text-white'>Quiz
 		{# {{quiz_id}} #}
 	</h1>
 
@@ -55,17 +54,16 @@
 			'class': 'quizAnswers p-3 option-input radio',
 			'onclick':"RadioValidator();"
 		}}) }}
-		<div
-			id='submitBtnContainer' class='text-center' onclick="loadingButton()">
+		<div id='submitBtnContainer' class='text-center' onclick="loadingButton()">
 
 			{# Useless Btn #}
 			{{ form_widget (quizForm.save, {'attr': {
 				'class': 'btn btn-dark mb-0 ',
 				'style': 'display:none'
 			}}) }}
-			<button id='movingButton' type="submit" class="btn btn-dark mb-0">
-				<span id='Hspinner' class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none "></span>
-				<div id='magicText' style='display:block'>NEXT QUESTION
+			<button {# id='movingButton' #} type="submit" class="btn btn-dark mb-0">
+				<span {# id='Hspinner' #} role="status" aria-hidden="true" style="display:none "></span>
+				<div {# id='magicText' #} style='display:block'>NEXT QUESTION
 				</div>
 			</button>
 		</div>
