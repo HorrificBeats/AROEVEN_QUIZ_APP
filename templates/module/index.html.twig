@@ -1,49 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wawawewa!
-{% endblock %}
+{% block title %}Modules{% endblock %}
 
 {% block body %}
-	<h1 class='text-white'>
-		Type 1 [hidden] </h1>
-	<div class='container col-lg-12 d-none'>
-		<div class='card-deck'>
-			{% for module in modules %}
-				<div class="card m-3 hoverable bg-dark text-white hvr-wobble-vertical">
-					<a href="{{ path('module', {'id' : module.id})}}">
-						<img src="https://media.gettyimages.com/photos/bullying-in-the-corridor-picture-id911026652?s=612x612" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title text-white">{{module.title}}</h5>
-							<p class="card-text text-white">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-						</div>
-					</a>
-				</div>
-				<a href="{{ path('module', {'id' : module.id})}}">
-					Culoare dinamica in functie de ID
-					{% if module.id is odd %}
-						<div style='background-color:red;' class='moduleCard card m-1 col-lg-12 p-3 mr-5 hoverable'>
-							{{module.title}}
-						</div>
-					{% else %}
-						<div style='background-color:white' class='moduleCard card m-1 col-lg-12 p-3 mr-5 hoverable'>
-							{{module.title}}
-						</div>
-					{% endif %}
-				</a>
-			{% endfor %}
-		</div>
-	</div>
-	<hr>
-	<h1>
-		Type 2</h1>
+	{# Kept ModuleID static, to add custom photos & a blank module-card #}
 	<div class="card-deck col-lg-12 m-auto animate__animated animate__bounceInLeft">
 		<div class="card m-3 hoverable bg-dark text-white hvr-wobble-vertical">
 			<a href="{{ path('module', {'id' : 1})}}">
 				<img src="https://media.gettyimages.com/photos/bullying-in-the-corridor-picture-id911026652?s=612x612" class="card-img-top" alt="...">
 				<div class="card-body col-12">
 					<h6 class="card-title text-white">MODULE A</h6>
-					<p class="card-text text-white">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+					<p class="card-text text-white">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 				</div>
+				<hr>
+				<li class="list-group-item rounded-bottom bg-dark text-white fixed-bottom"> ⏱ Estimated Time: 15 mins</li>
 			</a>
 		</div>
 		<div class="card  m-3 hoverable bg-dark text-white hvr-wobble-vertical animanted pulse">
@@ -53,6 +23,8 @@
 					<h6 class="card-title text-white">MODULE B</h6>
 					<p class="card-text text-white">This card has supporting text below as a natural lead-in to additional content.</p>
 				</div>
+				<hr>
+				<li class="list-group-item rounded-bottom bg-dark text-white fixed-bottom">⏱ Estimated Time: 40 mins</li>
 			</a>
 		</div>
 		<div class="card  m-3 hoverable bg-dark text-white hvr-wobble-vertical animanted pulse">
@@ -62,19 +34,10 @@
 					<h6 class="card-title text-white">MODULE C</h6>
 					<p class="card-text text-white">Coming soon!</p>
 				</div>
+				<hr>
+				<li class="list-group-item rounded-bottom bg-dark text-white fixed-bottom"> ⏱ Estimated Time: TBA </li>
+
 			</a>
 		</div>
 	</div>
-
-
-	<style>
-		.moduleCard {
-			{
-				# float: center; #
-			}
-			width: 250px;
-			height: 250px;
-			text-align: center;
-		}
-	</style>
 {% endblock %}

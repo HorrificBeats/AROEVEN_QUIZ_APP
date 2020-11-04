@@ -12,9 +12,8 @@ class TutorialController extends AbstractController
      */
     public function index()
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        /* DENYING ACCESS */
-        
+        $this->denyAccessUnlessGranted('ROLE_USER');        //DENYING ACCESS
+
         return $this->render('tutorial/index.html.twig', [
             'controller_name' => 'TutorialController',
         ]);

@@ -1,22 +1,7 @@
 {% extends 'base.html.twig' %}
-
-{% block title %} Wawawewa!
-{% endblock %}
-
+{% block title %} Tutorial {% endblock %}
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
-	<div class='animated zoomIn container rounded col-lg-12 p-4 mt-4 mb-4 hoverable' style='background-color: #f0f8ff'>
+	<div id='Tutorial' class='animated zoomIn container rounded col-lg-12 p-4 mt-4 mb-4 hoverable'>
 		<h1 class=''>TUTORIAL</h1>
 		<div class="text-justify">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
@@ -26,13 +11,13 @@
 		</div>
 	</div>
 	<div class='text-center'>
-	<br>
-	<div class='wrap'>
-		<a href="{{ path('module', {'id' : '1'})}}">
-			<button class='{# btn btn-secondary mt-3 #} button'>
-				START
-			</button>
-		</a>
-	</div>
+		<br>
+		<div class='wrap'>
+			<a href="{{ path('module', {'id' : '1'})}}">
+				<button class='button'>
+					START
+				</button>
+			</a>
+		</div>
 	</div>
 {% endblock %}

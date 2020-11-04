@@ -1,23 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Wawawewa!
-{% endblock %}
+{% block title %} ADMIN {% endblock %}
 
 {% block body %}
 
-
-
-		{# RESULTS TABLE #}
+{# RESULTS TABLE #}
 		{% if app.request.attributes.get('_route') == 'admin_results' %}
-			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable '> 
-				<table id="table_id" datatables='' class="display p-1 bg-white responsive " style="width:100%">
+			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'> 
+				<table id="table_id" datatables='' class="display p-1 bg-white responsive w-100">
+
+					{# Custom tag for Datables #}
 					<thead>
-						<th data-priority="1">USER</th>	{# Ordinea in care dispar coloanele #}
+						{# Priority for dissapearing columns; biggest number dissapears first #}
+						<th data-priority="1">USER</th>	
 						<th data-priority="4">q.number</th>
 						<th data-priority="2">QUESTION</th>
 						<th data-priority="5">answ.nb</th>
 						<th data-priority="3">ANSWER</th>
 					</thead>
+
+					{# Custom tag for Datables #}
 					<tbody>
 						{% for usr_answ in userAnswer %}
 							<tr class='resultsAll'>
@@ -35,10 +37,12 @@
 			</div>
 		{% endif %}
 
-		{# MODULES TABLE #}
+{# MODULES TABLE #}
 		{% if app.request.attributes.get('_route') ==  'admin_modules' %}
 			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'>
-				<table id="table_id" datatables='' class="display p-1 responsive wrap bg-white" style="width:100%">
+				<table id="table_id" datatables='' class="display p-1 responsive wrap bg-white w-100">
+
+					{# Custom tag for Datables #}
 					<thead>
 						<tr class='modulesAll'>
 							<th data-priority="1">MODULES</th>
@@ -47,8 +51,10 @@
 							<th data-priority="5">Content Type</th>
 						</tr>
 					</thead>
-					{# Trec prin SLIDE ca sa ajung la MODULE #}
+
+					{# Custom tag for Datables #}
 					<tbody>
+						{# Going through SLIDES to get to MODULES #}
 						{% for slide in slides %}
 
 							<tr>
@@ -59,18 +65,19 @@
 									<i>{{slide.getContentType}}</i>
 								</td>
 							</tr>
-
 						{% endfor %}
 					</tbody>
 				</table>
 			</div>
 		{% endif %}
 
-		{# QUIZZEZ TABLE #}
+{# QUIZZEZ TABLE #}
 		{% if app.request.attributes.get('_route') == 'admin_quizzes' %}
 			<div class='container responsive rounded mt-5 pt-3 col-lg-10 hoverable bg-white'>
-				<table id="table_id" datatables='' class="display p-1 responsive wrap" style="width:100%; position:relative; z-index:3">
-					<thead >
+				<table id="table_id" datatables='' class="display p-1 responsive wrap w-100">
+					
+					{# Custom tag for Datables #}
+					<thead>
 						<tr>
 							<th data-priority="3">Quiz id</th>
 							<th data-priority="4">Q_N</th>
@@ -81,6 +88,8 @@
 							<th data-priority="7">Delete</th>
 						</tr>
 					</thead>
+					
+					{# Custom tag for Datables #}
 					<tbody>
 						{% for answer in answers %}
 							<tr class='quizzesAll'>
@@ -104,83 +113,4 @@
 				</table>
 			</div>
 		{% endif %}
-
-
-		{# <style>
-																							table {
-																								font-family: arial, sans-serif;
-																								border-collapse: collapse;
-																								width: 80%;
-																								margin-left: 15%;
-																								margin-right: auto;
-																							}
-																							td,
-																							th {
-																								border: 2px solid black;
-																								text-align: justify;
-																								padding: 6px;
-																							}
-																					
-																					
-																							{
-																								# TABLE GROUPINGS #
-																							}
-																							{
-																								# RESULTS #
-																							}
-																							{
-																								# PER NUMBER OF QUESTIONS IN QUIZ #
-																							}
-																							.resultsAll:nth-child(10n + 2) {
-																								background-color: #e49600;
-																							}
-																							.resultsAll:nth-child(10n + 3) {
-																								background-color: #e49600;
-																							}
-																							.resultsAll:nth-child(10n + 4) {
-																								background-color: #e49600;
-																							}
-																							.resultsAll:nth-child(10n + 5) {
-																								background-color: #e49600;
-																							}
-																							.resultsAll:nth-child(10n + 6) {
-																								background-color: #e49600;
-																							}
-																							{
-																								# .resultsAll:nth-child(4n + 3) {
-																									background-color: #e49600;
-																								} #
-																							}
-																					
-																					
-																							{
-																								# MODULES #
-																							}
-																							{
-																								# Cum pot sa colorez diferite pt. fiecare valoare din MODULE.TITLE ?? #
-																							}
-																							{
-																								# Vezi TRELLO #
-																							}
-																					
-																							{
-																								# QUIZ #
-																							}
-																							.quizzesAll:nth-child(10n + 2) {
-																								background-color: #ffffff;
-																							}
-																							.quizzesAll:nth-child(10n + 3) {
-																								background-color: #ffffff;
-																							}
-																							.quizzesAll:nth-child(10n + 4) {
-																								background-color: #ffffff;
-																							}
-																							.quizzesAll:nth-child(10n + 5) {
-																								background-color: #ffffff;
-																							}
-																							.quizzesAll:nth-child(10n + 6) {
-																								background-color: #ffffff;
-																							}
-																						</style> #}
-
 {% endblock %}

@@ -40,11 +40,8 @@ class RegistrationController extends AbstractController
             $today= new DateTime;
             
             $diff = $today->diff($birthdate);
-            //$age=$diff->y;
-            
             $user->setAge($diff->y);
             //dd($user, $today, $birthdate, $diff);
-            
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

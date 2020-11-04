@@ -1,48 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Wawawewa!
-	{# TBDted #}
-{% endblock %}
+{# Titre dynamique #}
+{% block title %} {{module[id-1].title}} {% endblock %}
 
 {% block body %}
-	<div
-		class='container col-lg-10'>
-		{# DYNAMIC TITLE #}
+	<div class='container col-lg-10'>
+		{# Titre dynamique #}
 		<h1 class='text-bold text-white'>
 			<i>{{module[id-1].title}}</i>
 		</h1>
 
-		{# Each MODULE has different colors  #}
+		{# Chaque MODULE a une couleur différente #}
 		{% if id is odd %}
-			<div id='SlidesContainer' class='rounded animated fadeIn bg-light'>
-				{# MODULE A #}
+
+		{# MODULE A #}
+			<div id='ModuleA' class='rounded animated fadeIn'>
+				{# {{dump(id)}} #}
+				{# {{dump(slides|length)}} #}
+
 				{% for slide in slides %}
+					{# 1ere Slide est visible (manuel!) #}
+					{# A specifier en fonction du module #}
 					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
-						<h3 style='text-align:center' class='mb-3'>
-							[
-								{{slide.getSlideNumber}}
-							]
+						{# {{dump(slide)}} #}
+
+						<h3 class='mb-3 text-center'>
+							- {{slide.getSlideNumber}} -
 						</h3>
-						<div class='col-12' style='min-height: 400px;'>	
-							{{slide.content|raw}} {# Ca sa nu adauge ghilimele degeaba #}
+						<div id='SlideContentA' class='col-12'>
+							{# 'raw' Pour enlever les guillemets #}	
+							{{slide.content|raw}} 
 						</div>
 						<br>
+						
 						<div class='text-center'>
-							{# Fac sa DISPARA BTN daca SLIDE Id este ULTIMUL (cifra manuala) #}
+							{# !! Slide.id DOIT être consécutif, sinon no-no #}
 							<button 
 								onclick='showSlide("slide{{slide.id+1}}")' 
-								class='mt-3 btn btn-dark {% if slide.id == 5 %} d-none {% endif %}
+								{# IF pour Cacher le BTN si sur le derniere SLIDE (slides|length) #}
+								class='mt-3 btn btn-dark 
+								{% if slide.getSlideNumber == slides|length %} d-none {% endif %}
 								'>NEXT SLIDE
 							</button>
-						
 						{# {{dump(slide.id)}} #}
 
-						{# Fac sa APARA BTN DACA SLIDE ID este ULTIMUL (cifra imputata manual) #}
-						{% if slide.id == 5 %}
+						{# IF pour Afficher le BTN si sur le derniere SLIDE (auto) #}
+						{% if slide.getSlideNumber == slides|length %}
 							<a id='moduleB' href="{{ path('module', {'id' : 2}) }}">
-								<button class='btn btn-danger'>
-									Go To MODULE B
-								</button>
+								<button class='btn btn-danger'> Go To MODULE B </button>
 							</a>
 						{% endif %}
 						</div>
@@ -50,68 +55,52 @@
 					</div>
 				{% endfor %}
 			</div>
+		
 		{% else %}
-			<div style='background-color: #fff5eb;' class='rounded'>
-				{# MODULE B #}
+
+
+		{# MODULE B #}
+			<div id='ModuleB' class='rounded'>
 				{% for slide in slides %}
 					<div id='slide{{slide.id}}' class='slideN{{slide.getSlideNumber}} slide p-4' 
-					{{ slide.id == 6 ? 'style="display:"' : 'style="display:none"' }}>
-						<h3 style='text-align:center' class='mb-3'>
-							[
-							{{slide.getSlideNumber}}
-							]
+					{# 1ere Slide est visible (manuel!) #}
+					{# A specifier en fonction du module #}
+					{{ slide.id == 7 ? 'style="display:"' : 'style="display:none"' }}>
+
+						<h3 class='mb-3 text-center'>
+							- {{slide.getSlideNumber}} -
 						</h3>
-						<div class='col-12' style='min-height: 400px;'>
+						<div id='SlideContentB' class='col-12'>
 							{{slide.content|raw}}
 							{# Ca sa nu adauge ghilimele degeaba #}
 						</div>
 						<br>
-						<div id='nextButton' class='text-center' style='display:'>
+
+						<div id='nextButton' class='text-center'>
+							{# !! Les Slide.id DOIVENT être consécutifs, sinon no-no #}
 							<button 
-							onclick='showSlide("slide{{slide.id+1}}")' 
-							class='text-center mt-3 btn btn-secondary {% if slide.id == 10 %} d-none {% endif %}
-							'>
-								NEXT SLIDE
+								onclick='showSlide("slide{{slide.id+1}}")'
+								{# IF pour Cacher le BTN si sur le derniere SLIDE (slides|length) #} 
+								class='text-center mt-3 btn btn-secondary 
+								{% if slide.getSlideNumber == slides|length %} d-none {% endif %}
+								'>
+									NEXT SLIDE
 							</button>
-						{# Fac sa APARA BTN DACA SLIDE ID este ULTIMUL (cifra imputata manual) #}
-						{% if slide.id == 10 %}
+						{# IF pour Afficher le BTN si sur le derniere SLIDE (auto) #}
+						{% if slide.getSlideNumber == slides|length %}
 							{# IF I'm on the 2nd Module, I'll go to the POST-QUIZ #}
-							<a id='quizPost' style='display: ' href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
+							<a id='quizPost' href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
 								<button class='btn btn-danger'>
 									Go To Quiz-POST
 								</button>
 							</a>
 						{% endif %}	
 						</div>
-						{# {{dump(slide.id)}} #}
 						<br>
 					</div>
 				{% endfor %}
 			</div>
 		{% endif %}
-
-
-		{# NAVIGATION TO 2nd MODULE & 2nd QUIZ #}
-		{# TBDeleted  #}
-		<div class='d-none'>
-		{% if module[id-1] == module[0] %}
-
-			{# IF I'm already on the 1st Module, I'll go to the next one #}
-			<a id='moduleB' href="{{ path('module', {'id' : 2}) }}">
-				<button class='btn btn-danger'>
-					Go To MODULE B
-				</button>
-			</a>
-		{% elseif module[id-1] == module[1] %}
-			{# IF I'm on the 2nd Module, I'll go to the POST-QUIZ #}
-			<a id='quizPost' style='display: ' href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
-				<button class='btn btn-danger'>
-					Go To Quiz-POST
-				</button>
-			</a>
-		{% endif %}
-		</div>
-
 	</div>
 
 	

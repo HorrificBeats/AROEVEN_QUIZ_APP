@@ -16,13 +16,13 @@ class SiteMapController extends AbstractController
     {
         $hostname = $request->getSchemeAndHttpHost(); //eg "http://127.0.0.1:8000"
 
-        //dd($hostname);
+        dd($hostname);
         $urls = []; // ou array()
         
         //On ajoute les URLs "statiques"
         //(Les crochets vides permets d'ajouter des donnes a la fin du tableau)
-        $urls[] = ['loc' => $this->generateUrl('home')];
-        dd($urls);
+        //$urls[] = ['loc' => $this->generateUrl('home')];
+        //dd($urls);
 
         return $this->render('site_map/index.html.twig', [
             'controller_name' => 'SiteMapController',

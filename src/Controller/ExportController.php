@@ -1,19 +1,15 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\UserAnswer;
-
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /* Php Spreadsheet */
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\Routing\Annotation\Route;
-
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 
 class ExportController extends AbstractController
@@ -30,9 +26,10 @@ class ExportController extends AbstractController
     }
 
 
+    // Populates a tabel with the results data from UserAnswer
+    // Remplit un tableau avec les données de résultats de UserAnswer
     private function getData()
     {
-        
         $list = [];
         $userAnswers = $this->entityManager->getRepository(UserAnswer::class)->findAll();
 
@@ -48,33 +45,28 @@ class ExportController extends AbstractController
         return $list;
     }
 
+    // Creates .xlsx file with results
+    // Creation d'un fichier .xlsx avec les résultats
     /**
      * @Route("/export",  name="export")
      */
     public function export()
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        /* DENYING ACCESS */
-        $spreadsheet = new Spreadsheet();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');           //DENYING ACCESS
 
+        $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
         $sheet->setTitle('User List');
 
         $sheet->getCell('A1')->setValue('User');
-        $sheet->getCell('B1')->setValue('Quiz_type');
+        //$sheet->getCell('B1')->setValue('Quiz_type');
         $sheet->getCell('C1')->setValue('Question');
         $sheet->getCell('D1')->setValue('Answer');
         $sheet->getCell('E1')->setValue('Answer_ID');
 
-        $sheet->getCell('F1')->setValue('Answer_ID');
-        $sheet->getCell('G1')->setValue('Answer_ID');
-
-
-
         // Increase row cursor after header write
         $sheet->fromArray($this->getData(), null, 'A2', true);
-
 
         $writer = new Xlsx($spreadsheet);
 

@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ModuleController extends AbstractController
 {
+    //Shows all modules
     /**
      * @Route("/module", name="modules_page")
      */
     public function allModules()
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        /* DENYING ACCESS */
+        $this->denyAccessUnlessGranted('ROLE_USER');        //DENYING ACCESS
 
         $modules = $this->getDoctrine()
             ->getRepository(Module::class)
@@ -27,6 +27,7 @@ class ModuleController extends AbstractController
         ]);
     }
 
+    // Shows one module
     /**
      * @Route("/module/{id}", name="module")
      */
@@ -42,15 +43,7 @@ class ModuleController extends AbstractController
             "id_module" => $id    
             ]);
 
-        dump($module, $id, $slides);
-        /* Var Dictionary 
-        $module = obj. w/ 1st lvl values, excluding FKs
-        $id = module.ID; inputed by URL;
-        $slides = obj. 
-        
-        
-        */
-
+        //dump($module, $id, $slides);
 
         return $this->render('module/module.html.twig', array(
             'controller_name' => 'ModuleController',
