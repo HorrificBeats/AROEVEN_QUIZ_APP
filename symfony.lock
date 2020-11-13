@@ -1,6 +1,21 @@
 {
+    "composer/ca-bundle": {
+        "version": "1.2.8"
+    },
+    "composer/composer": {
+        "version": "2.0.6"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
+    },
+    "composer/semver": {
+        "version": "3.2.4"
+    },
+    "composer/spdx-licenses": {
+        "version": "1.5.4"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.5"
     },
     "craue/formflow-bundle": {
         "version": "3.3.2"
@@ -87,6 +102,12 @@
     "egulias/email-validator": {
         "version": "2.1.22"
     },
+    "icanhazstring/composer-unused": {
+        "version": "0.7.5"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.10"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -170,6 +191,15 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "react/promise": {
+        "version": "v2.8.0"
+    },
+    "seld/jsonlint": {
+        "version": "1.8.3"
+    },
+    "seld/phar-utils": {
+        "version": "1.1.1"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

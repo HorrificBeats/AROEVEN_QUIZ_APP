@@ -214,6 +214,13 @@
     width:31%;
   }
 
+  .form-error-message {
+    background-color:rgba(0, 0, 0, 0.324);
+    border-radius: 2px;
+    padding:2px;
+    color:white;
+  }
+
 
 /* LOGIN */
   #LoginForm {

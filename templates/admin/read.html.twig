@@ -3,9 +3,10 @@
 {% block title %} ADMIN {% endblock %}
 
 {% block body %}
-
+		
 {# RESULTS TABLE #}
 		{% if app.request.attributes.get('_route') == 'admin_results' %}
+		{# {{dump(userAnswer)}} #}
 			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'> 
 				<table id="table_id" datatables='' class="display p-1 bg-white responsive w-100">
 

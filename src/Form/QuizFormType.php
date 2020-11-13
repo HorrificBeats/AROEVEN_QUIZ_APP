@@ -46,6 +46,7 @@ class QuizFormType extends AbstractType
                     return $er->createQueryBuilder('quiz')
                         ->andWhere('quiz.id = :quiz_id')
                         ->setParameter('quiz_id', $this->sessionInterface->get('quiz_id'));
+                        // ^ Prevents SQL Ijections ^
                 },
                 //To hide stuff
                 //'disabled' => true, IF ENABLED IT DOESNT SEND ANY DATA

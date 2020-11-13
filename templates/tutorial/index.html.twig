@@ -1,6 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block title %} Tutorial {% endblock %}
 {% block body %}
+	{# FLASH Messages #}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-warning">
+			{{ message }}
+		</div>
+    {% endfor %}
+
+	{% for message in app.flashes('login') %}
+		<div class="alert alert-success">
+			<b> {{ message }} </b>
+		</div>
+    {% endfor %}
 	<div id='Tutorial' class='animated zoomIn container rounded col-lg-12 p-4 mt-4 mb-4 hoverable'>
 		<h1 class=''>TUTORIAL</h1>
 		<div class="text-justify">

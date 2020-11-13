@@ -36,7 +36,7 @@ class ExportController extends AbstractController
         foreach ($userAnswers as $usr_answ) {
             $list[] = [
                 $usr_answ->getUser()->getUsername(),
-                $usr_answ->getQuizType(),
+                //$usr_answ->getQuizType(),
                 $usr_answ->getQuestion()->getContent(),
                 $usr_answ->getAnswer()->getContent(),
                 $usr_answ->getAnswer()->getId()
@@ -61,9 +61,10 @@ class ExportController extends AbstractController
 
         $sheet->getCell('A1')->setValue('User');
         //$sheet->getCell('B1')->setValue('Quiz_type');
-        $sheet->getCell('C1')->setValue('Question');
-        $sheet->getCell('D1')->setValue('Answer');
-        $sheet->getCell('E1')->setValue('Answer_ID');
+        $sheet->getCell('B1')->setValue('Question');
+        $sheet->getCell('C1')->setValue('Answer');
+        $sheet->getCell('D1')->setValue('Answer_ID');
+
 
         // Increase row cursor after header write
         $sheet->fromArray($this->getData(), null, 'A2', true);
@@ -77,6 +78,7 @@ class ExportController extends AbstractController
         // Create the excel file in the tmp directory of the system
         $writer->save($temp_file);
 
+        
         // Return the excel file as an attachment
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
     }

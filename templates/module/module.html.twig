@@ -9,7 +9,7 @@
 		<h1 class='text-bold text-white'>
 			<i>{{module[id-1].title}}</i>
 		</h1>
-
+	
 		{# Chaque MODULE a une couleur différente #}
 		{% if id is odd %}
 
@@ -33,7 +33,7 @@
 						</div>
 						<br>
 						
-						<div class='text-center'>
+						<div class='NextSlideTimer text-center animate__animated invisible'>
 							{# !! Slide.id DOIT être consécutif, sinon no-no #}
 							<button 
 								onclick='showSlide("slide{{slide.id+1}}")' 
@@ -46,8 +46,15 @@
 
 						{# IF pour Afficher le BTN si sur le derniere SLIDE (auto) #}
 						{% if slide.getSlideNumber == slides|length %}
+							<a id='moduleB' href="{{ path('module', {'id' : 1}) }}">
+								<button class='btn btn-dark'> 
+									Restart 
+								</button>
+							</a>
 							<a id='moduleB' href="{{ path('module', {'id' : 2}) }}">
-								<button class='btn btn-danger'> Go To MODULE B </button>
+								<button class='btn btn-danger'> 
+									Go To MODULE B 
+								</button>
 							</a>
 						{% endif %}
 						</div>
@@ -76,7 +83,7 @@
 						</div>
 						<br>
 
-						<div id='nextButton' class='text-center'>
+						<div class='NextSlideTimer text-center animate__animated invisible'>
 							{# !! Les Slide.id DOIVENT être consécutifs, sinon no-no #}
 							<button 
 								onclick='showSlide("slide{{slide.id+1}}")'
@@ -88,9 +95,14 @@
 							</button>
 						{# IF pour Afficher le BTN si sur le derniere SLIDE (auto) #}
 						{% if slide.getSlideNumber == slides|length %}
+							<a id='moduleB' href="{{ path('module', {'id' : 2}) }}">
+								<button class='btn btn-secondary'> 
+									Restart 
+								</button>
+							</a>
 							{# IF I'm on the 2nd Module, I'll go to the POST-QUIZ #}
 							<a id='quizPost' href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
-								<button class='btn btn-danger'>
+								<button class='btn btn-dark'>
 									Go To Quiz-POST
 								</button>
 							</a>

@@ -34,7 +34,9 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            
+            // Flash Message
+            $this->addFlash('success', 'Successfully created your account!');
+
             /* AGE CALCULATION */
             $birthdate = $user->getBirthdate();
             $today= new DateTime;
@@ -55,6 +57,7 @@ class RegistrationController extends AbstractController
                 'main' // firewall name in security.yaml
             );
         }
+        
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),

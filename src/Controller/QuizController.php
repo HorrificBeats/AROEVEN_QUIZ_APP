@@ -43,7 +43,7 @@ class QuizController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $data['quiztype'] = 'ASS';
-            dump($data);  //all good?
+            //dump($data);  //all good?
 
             $userAnswer = new UserAnswer();
 
@@ -60,7 +60,7 @@ class QuizController extends AbstractController
             // Manual redirection to CONGRATS Page
             if ($question_id < 5) {
                 $question_id = $question_id + 1;
-                dump($question_id);
+                //dump($question_id);
                 return $this->redirectToRoute('quizPOST_', [
                     'form' => $form->createView(),
                     'questions' => $questions,
