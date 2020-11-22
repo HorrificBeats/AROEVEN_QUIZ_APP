@@ -4,15 +4,15 @@
 
 {% block body %}
 		
-{# RESULTS TABLE #}
+	{# RESULTS TABLE #}
 		{% if app.request.attributes.get('_route') == 'admin_results' %}
-		{# {{dump(userAnswer)}} #}
 			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'> 
 				<table id="table_id" datatables='' class="display p-1 bg-white responsive w-100">
 
 					{# Custom tag for Datables #}
 					<thead>
-						{# Priority for dissapearing columns; biggest number dissapears first #}
+						{# Priority for dissapearing columns; 
+						biggest number dissapears first #}
 						<th data-priority="1">USER</th>	
 						<th data-priority="4">q.number</th>
 						<th data-priority="2">QUESTION</th>

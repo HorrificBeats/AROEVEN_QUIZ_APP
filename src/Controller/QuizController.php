@@ -23,6 +23,7 @@ class QuizController extends AbstractController
      */
     public function quizPOST_(EntityManagerInterface $em, Request $request, SessionInterface $session, QuestionRepository $questionRepo, $quiz_id, $question_id)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');        //DENYING ACCESS
         //$q_number = 1;
 
         //Showing the specific question outside the form
@@ -47,7 +48,7 @@ class QuizController extends AbstractController
 
             $userAnswer = new UserAnswer();
 
-            $userAnswer->setUser($this->getUser());          // Extras automat prin $userAnswer->setUser($this->getUser());
+            $userAnswer->setUser($this->getUser());          // ^^ Extras automat 
             $userAnswer->setQuiz($data['quiz']);             // specificate cu GET gen, "quizz_{id}/question_{nbr}"
             $userAnswer->setQuestion($data['question']);
             $userAnswer->setAnswer($data['answer']);
@@ -60,7 +61,6 @@ class QuizController extends AbstractController
             // Manual redirection to CONGRATS Page
             if ($question_id < 5) {
                 $question_id = $question_id + 1;
-                //dump($question_id);
                 return $this->redirectToRoute('quizPOST_', [
                     'form' => $form->createView(),
                     'questions' => $questions,

@@ -22,7 +22,7 @@ class AdminController extends AbstractController
         $userAnswer = $this->getDoctrine()
             ->getRepository(UserAnswer::class)
             ->findAll();
-        dump($userAnswer);
+        //dump($userAnswer);
 
         return $this->render('admin/read.html.twig', [
             'controller_name' => 'AdminController',

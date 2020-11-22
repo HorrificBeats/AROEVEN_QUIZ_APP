@@ -33,6 +33,8 @@ class ModuleController extends AbstractController
      */
     public function oneModule($id)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         $module = $this->getDoctrine()
             ->getRepository(Module::class)
             ->findAll($id);

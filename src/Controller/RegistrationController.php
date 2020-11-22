@@ -37,12 +37,13 @@ class RegistrationController extends AbstractController
             // Flash Message
             $this->addFlash('success', 'Successfully created your account!');
 
-            /* AGE CALCULATION */
+            /* User's AGE  */
             $birthdate = $user->getBirthdate();
             $today= new DateTime;
-            
             $diff = $today->diff($birthdate);
+            // => Age in years
             $user->setAge($diff->y);
+
             //dd($user, $today, $birthdate, $diff);
             
             $entityManager = $this->getDoctrine()->getManager();

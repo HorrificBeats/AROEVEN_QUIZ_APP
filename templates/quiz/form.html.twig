@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %} Quiz Time! {% endblock %}
 {% block body %}
+	
 	<div class='container'>
 		<div class="progress mb-4" >
 			<div id='progressBar' class="bg-secondary progress-bar progress-bar-striped progress-bar animate__animated animate__slideInLeft " role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
@@ -16,8 +17,7 @@
 			{{ form_widget (quizForm.question) }}		{# HIDDEN #}
 			{{ form_widget (quizForm.quiz) }}			{# HIDDEN #}
 			{{ form_widget (quizForm.answer, {'attr': {
-				'class': 'quizAnswers p-3 option-input radio',
-				'onclick':"RadioValidator();"
+				'class': 'quizAnswers p-3 option-input radio'
 			}}) }}
 
 			<div id='submitBtnContainer' class='text-center' onclick="movingButton()">

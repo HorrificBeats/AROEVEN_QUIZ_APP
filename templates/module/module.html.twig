@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {# Titre dynamique #}
-{% block title %} {{module[id-1].title}} {% endblock %}
+{% block title %} 
+		{# {{module[id-1].title}} #}
+{% endblock %}
 
 {% block body %}
+	{# {% if module[id-1].title is defined %}
+		<h1 class='text-white'>404 Error Bauss</h1>
+	{% endif %} #}
+
+	{% if (id != 1) or (id != 2) %}
 	<div class='container col-lg-10'>
 		{# Titre dynamique #}
 		<h1 class='text-bold text-white'>
@@ -21,9 +28,9 @@
 				{% for slide in slides %}
 					{# 1ere Slide est visible (manuel!) #}
 					{# A specifier en fonction du module #}
+					
 					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
-						{# {{dump(slide)}} #}
-
+					{# ^^ slide{{slide.id}} exista pt. a putea crea IF-ul #}
 						<h3 class='mb-3 text-center'>
 							- {{slide.getSlideNumber}} -
 						</h3>
@@ -114,6 +121,9 @@
 			</div>
 		{% endif %}
 	</div>
+	{% else %}
+		<h1 class='text-warning'>404 Error Bauss</h1>
+	{% endif %}
 
 	
 {% endblock %}

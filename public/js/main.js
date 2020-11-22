@@ -3,14 +3,12 @@
 function showSlide(elementID) {
   var elem = document.getElementById(elementID);
   //elementID will be replaced with a TWIG variable, containing the Slide Content
-
   if (!elem) {
     alert("No slides found.");
     return;
   }
-  //Creates object with all slides
+  //Creates array with all <div id='Slide'> 
   var slides = document.getElementsByClassName("slide");
-
   //Adds 'display:none' to all slides
   for (var i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
@@ -44,7 +42,7 @@ $(document).ready(function () {
     searching: false, //Disable Search
     responsive: true, //Enable reponsive + Breakpoints
     pagingType: "simple", //Only show Prev/Next btns
-    pageLength: 15, //Default pageLenght
+   pageLength: 25, //Default pageLenght
     orderClasses: true, //Highlight Ordered Column
     select: true,
     columnDefs: [
@@ -67,3 +65,25 @@ $(document).ready(function () {
     .getElementById("movingButton")
     .classList.add("animate__animated", "animate__bounce");
 } */
+
+// Contact BTN
+function clickedBTN() {
+  var btnL = document.getElementById('contactBtnLarge');
+  var btnS = document.getElementById('contactBTN');
+  
+  if (btnL.classList.contains('btn-secondary')) {
+    btnL.classList.remove('btn-secondary');
+    btnL.classList.add('btn-dark');
+  }else {
+    btnL.classList.remove('btn-dark');
+    btnL.classList.add('btn-secondary');
+  }
+
+  if (btnS.classList.contains('btn-secondary')) {
+    btnS.classList.remove('btn-secondary');
+    btnS.classList.add('btn-dark');
+  }else {
+    btnS.classList.remove('btn-dark');
+    btnS.classList.add('btn-secondary');
+  }
+}

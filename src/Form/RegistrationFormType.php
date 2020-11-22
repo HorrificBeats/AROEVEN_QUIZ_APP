@@ -17,7 +17,6 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            /* ->add('username') */
             ->add('username', null, [
                 'constraints' => [
                     new NotBlank([
@@ -52,7 +51,12 @@ class RegistrationFormType extends AbstractType
                 ],
 
             ])
-            ->add('birthdate', BirthdayType::class)
+            ->add('birthdate', BirthdayType::class, [
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                ]
+            ] 
+            )
         ;
     }
 
