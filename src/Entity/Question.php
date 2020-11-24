@@ -158,4 +158,9 @@ class Question
     {
         return $this->getContent();
     }
+
+    /* public function __toInt()
+    {
+        return intval($this->getQNumber());
+    } */
 }

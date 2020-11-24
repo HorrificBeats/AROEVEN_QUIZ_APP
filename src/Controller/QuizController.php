@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 class QuizController extends AbstractController
-{ 
+{
     /**
      * Quiz POST
      * @Route("quizPOST_{quiz_id}/{question_id}", name="quizPOST_")
@@ -31,20 +31,27 @@ class QuizController extends AbstractController
             ->getRepository(Question::class)
             ->findOneBy(['quiz' => $quiz_id, 'id' => $question_id]);
 
+        $questionAll = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->findBy(['quiz' => $quiz_id]);
+
+        $question_number = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->findOneBy(['quiz' => $quiz_id, 'id' => $question_id]);
+        dump($question_number->getQNumber());
+
         //Putting QuizID & QuestionID in the SESSION
         $session->set('quiz_id', $quiz_id);
         $session->set('question_id', $question_id);
-        //dump($session);
 
         //Creating form
         $form = $this->createForm(QuizFormType::class);
-        
+
         //Form submission
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $data['quiztype'] = 'ASS';
-            //dump($data);  //all good?
 
             $userAnswer = new UserAnswer();
 
@@ -57,9 +64,8 @@ class QuizController extends AbstractController
             //dd($userAnswer);
             $em->persist($userAnswer);
             $em->flush();
-
             // Manual redirection to CONGRATS Page
-            if ($question_id < 5) {
+            if ($question_number->getQNumber() < count($questionAll)) {
                 $question_id = $question_id + 1;
                 return $this->redirectToRoute('quizPOST_', [
                     'form' => $form->createView(),

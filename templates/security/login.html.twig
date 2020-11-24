@@ -7,9 +7,10 @@
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
+	{% autoescape %}	
 	<form id='LoginForm' method="post" class='container col-lg-4 col-md-6 col-sm-8 mt-5 p-4 text-white rounded hoverable animatedGradient'>
 		<h1 class="h3 mb-3 font-weight-normal">Welcome back!</h1>
-
+	
 		<label for="inputUsername">Username</label>
 		<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
 		
@@ -39,4 +40,5 @@
 			</h7>
 		</div>
 	</form>
+	{% endautoescape %}
 {% endblock %}

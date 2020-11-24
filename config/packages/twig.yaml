@@ -3,4 +3,6 @@ twig:
     # other stuff here
     #form_themes: ['bootstrap_4_horizontal_layout.html.twig']
     form_themes: ['bootstrap_4_layout.html.twig']
-    autoescape: true
+
+    #DeActivate in case o random CACHE-based erro
+    #autoescape: true

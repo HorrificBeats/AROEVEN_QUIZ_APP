@@ -69,8 +69,9 @@ class QuizFormType extends AbstractType
                 'class' => Answer::class,
                 'choice_label' => function (Answer $answer) {
                     // Formating each answer string to show Question, Answer ID + the Answer content
-                    return sprintf('Q#%d:(%d) %s', $answer->getQuestion()->getId(), $answer->getId(), $answer->getContent());
-                },
+                    //return sprintf('Q#%d:(%d) %s', $answer->getQuestion()->getId(), $answer->getId(), $answer->getContent());
+                    return sprintf('%s', $answer->getContent());
+                },  
                 'expanded' => true,     //Radio-boxes
                 'multiple' => false,    //1-btn only
                 
