@@ -54,7 +54,8 @@ class RegistrationFormType extends AbstractType
             ->add('birthdate', BirthdayType::class, [
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-                ]
+                ],
+                'format' => 'dd MM yyyy'
             ] 
             )
         ;

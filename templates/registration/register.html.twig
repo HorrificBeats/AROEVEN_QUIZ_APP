@@ -21,7 +21,15 @@
 			{% endif %}
 			'>
 				<h1> WELCOME! </h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum lectus vel maximus efficitur. Donec quis dui vel dolor elementum malesuada. Maecenas non malesuada elit. Nunc id efficitur leo, quis viverra turpis. Vestibulum ullamcorper quam eget metus lacinia, eget blandit elit commodo. Nullam dolor nunc, lobortis quis arcu ut, rutrum egestas mi. Donec varius eleifend sapien ut dignissim. In hac habitasse platea dictumst. Phasellus vitae sollicitudin nibh. Ut consectetur volutpat enim, facilisis ultrices nibh porta sodales.</p>
+				<br>
+				<br>
+				<h4> You have arrived on the online version of the <b>"<i>Knowing thy enemy is best </i> - a holistic view on bullying"</b> workshop your currently participating to. We hope you'll enjoy your time here!</h4>
+				<br>
+				{% if not app.user %}
+					<h4>In the form on the right, choose a name, password and enter your birthdate to continue!</h4>
+				{% else %}
+					<h4> Click the button below to learn how to use this beauty of a site!</h4>
+				{% endif %}
 			</div>
 
 

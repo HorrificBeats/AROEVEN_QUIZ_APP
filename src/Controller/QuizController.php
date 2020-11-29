@@ -64,7 +64,7 @@ class QuizController extends AbstractController
             //dd($userAnswer);
             $em->persist($userAnswer);
             $em->flush();
-            // Manual redirection to CONGRATS Page
+            // Auto-redirection to CONGRATS Page
             if ($question_number->getQNumber() < count($questionAll)) {
                 $question_id = $question_id + 1;
                 return $this->redirectToRoute('quizPOST_', [

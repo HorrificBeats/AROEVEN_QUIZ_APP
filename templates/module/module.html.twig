@@ -11,7 +11,7 @@
 	{% endif %} #}
 
 	{% if (id != 1) or (id != 2) %}
-	<div class='container col-lg-10'>
+	<div class='container col-lg-8'>
 		{# Titre dynamique #}
 		<h1 class='text-bold text-white'>
 			<i>{{module[id-1].title}}</i>
@@ -21,7 +21,7 @@
 		{% if id is odd %}
 
 		{# MODULE A #}
-			<div id='ModuleA' class='rounded animated fadeIn'>
+			<div id='ModuleA' class=' rounded animated fadeIn'>
 				{# {{dump(id)}} #}
 				{# {{dump(slides|length)}} #}
 
@@ -29,12 +29,12 @@
 					{# 1ere Slide est visible (manuel!) #}
 					{# A specifier en fonction du module #}
 					
-					<div id='slide{{slide.id}}' class='slide p-4' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
+					<div id='slide{{slide.id}}' class='slide p-3 ' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
 					{# ^^ slide{{slide.id}} exista pt. a putea crea IF-ul #}
-						<h3 class='mb-3 text-center'>
-							- {{slide.getSlideNumber}} -
-						</h3>
-						<div id='SlideContentA' class='col-12'>
+						<h5 class='mb-3 text-center'>
+							<b>- {{slide.getSlideNumber}} -</b>
+						</h5>
+						<div id='SlideContentA' class='col-12 text-justify'>
 							{# 'raw' Pour enlever les guillemets #}	
 							{{slide.content|raw}} 
 						</div>
@@ -54,12 +54,12 @@
 						{# IF pour Afficher le BTN si sur le derniere SLIDE (auto) #}
 						{% if slide.getSlideNumber == slides|length %}
 							<a id='moduleB' href="{{ path('module', {'id' : 1}) }}">
-								<button class='btn btn-dark'> 
+								<button class='btn btn-dark col-xs-5'> 
 									Restart 
 								</button>
 							</a>
 							<a id='moduleB' href="{{ path('module', {'id' : 2}) }}">
-								<button class='btn btn-danger'> 
+								<button class='btn btn-danger col-xs-7'> 
 									Go To MODULE B 
 								</button>
 							</a>
@@ -76,15 +76,15 @@
 		{# MODULE B #}
 			<div id='ModuleB' class='rounded'>
 				{% for slide in slides %}
-					<div id='slide{{slide.id}}' class='slideN{{slide.getSlideNumber}} slide p-4' 
+					<div id='slide{{slide.id}}' class='slideN{{slide.getSlideNumber}} slide p-3' 
 					{# 1ere Slide est visible (manuel!) #}
 					{# A specifier en fonction du module #}
 					{{ slide.id == 7 ? 'style="display:"' : 'style="display:none"' }}>
 
-						<h3 class='mb-3 text-center'>
-							- {{slide.getSlideNumber}} -
-						</h3>
-						<div id='SlideContentB' class='col-12'>
+						<h5 class='mb-3 text-center'>
+							<b>- {{slide.getSlideNumber}} -</b>
+						</h5>
+						<div id='SlideContentB' class='col-12 text-justify'>
 							{{slide.content|raw}}
 							{# Ca sa nu adauge ghilimele degeaba #}
 						</div>
@@ -95,7 +95,7 @@
 							<button 
 								onclick='showSlide("slide{{slide.id+1}}")'
 								{# IF pour Cacher le BTN si sur le derniere SLIDE (slides|length) #} 
-								class='text-center mt-3 btn btn-secondary 
+								class='text-center btn btn-secondary 
 								{% if slide.getSlideNumber == slides|length %} d-none {% endif %}
 								'>
 									NEXT SLIDE
@@ -108,7 +108,7 @@
 								</button>
 							</a>
 							{# IF I'm on the 2nd Module, I'll go to the POST-QUIZ #}
-							<a id='quizPost' href="{{ path('quizPOST_', {'quiz_id' : 1, "question_id" : 1})}}">
+							<a id='quizPost' href="{{ path('quizPOST_', {'quiz_id' : 2, "question_id" : 11})}}">
 								<button class='btn btn-dark'>
 									Go To Quiz-POST
 								</button>

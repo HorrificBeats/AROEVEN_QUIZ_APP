@@ -17,6 +17,7 @@ function showSlide(elementID) {
   //Adds 'd:block' one-by-one to each slide
   elem.style.display = "block";
 
+
   // Timed-hidding of NextSlide Button (ignores the 1st slide)
   $(".NextSlideTimer").removeClass("animate__flipInX");
   $(".NextSlideTimer").addClass("invisible");
@@ -39,6 +40,7 @@ window.onload = function () {
 /* DATA TABLES Options */
 $(document).ready(function () {
   $("#table_id").DataTable({
+    order: [[ 0, "desc" ]],
     searching: false, //Disable Search
     responsive: true, //Enable reponsive + Breakpoints
     pagingType: "simple", //Only show Prev/Next btns
@@ -48,6 +50,11 @@ $(document).ready(function () {
     columnDefs: [
       { responsivePriority: 1, targets: 0 },
       { responsivePriority: 2, targets: -1 },
+      {
+        "targets": [ 0 ],
+        "visible": false,
+        "searchable": false
+    },
     ],
   });
 
