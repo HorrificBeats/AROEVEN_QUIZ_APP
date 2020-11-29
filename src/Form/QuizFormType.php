@@ -29,7 +29,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class QuizFormType extends AbstractType
 {
-    //For the SF queryBuilder
     public function __construct(QuestionRepository $questionRepository, SessionInterface $session)
     {
         $this->questionRepository = $questionRepository;
@@ -39,7 +38,7 @@ class QuizFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // For sending quiz_ID from twig template 
+            // For sending quiz_ID from, received from Twig template 
             ->add('quiz', EntityType::class, [
                 'class' => Quiz::class,
                 'query_builder' => function (QuizRepository $er) {
@@ -61,15 +60,16 @@ class QuizFormType extends AbstractType
                         ->andWhere('question.id = :question_id')
                         ->setParameter('question_id', $this->sessionInterface->get('question_id'));
                 },
-                'attr' => ['style' => 'display:none']       //Hiden field w/ GET value
+                //Hiden field w/ GET value
+                'attr' => ['style' => 'display:none']       
             ])
 
-            //For chosing the Answer, attached to a Question, attached respectively to a Quiz
+            //For chosing the Answer, attached to a Question and to a Quiz
             ->add('answer', EntityType::class, [
                 'class' => Answer::class,
                 'choice_label' => function (Answer $answer) {
-                    // Formating each answer string to show Question, Answer ID + the Answer content
-                    //return sprintf('Q#%d:(%d) %s', $answer->getQuestion()->getId(), $answer->getId(), $answer->getContent());
+                // Debug formatting: Question, Answer ID + the Answer content
+                //return sprintf('Q#%d:(%d) %s', $answer->getQuestion()->getId(), $answer->getId(), $answer->getContent());
                     return sprintf('%s', $answer->getContent());
                 },  
                 'expanded' => true,     //Radio-boxes

@@ -21,10 +21,10 @@ class QuizController extends AbstractController
      * Quiz POST
      * @Route("quizPOST_{quiz_id}/{question_id}", name="quizPOST_")
      */
-    public function quizPOST_(EntityManagerInterface $em, Request $request, SessionInterface $session, QuestionRepository $questionRepo, $quiz_id, $question_id)
+    public function quizPOST_(EntityManagerInterface $em, Request $request, SessionInterface $session, $quiz_id, $question_id)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');        //DENYING ACCESS
-        //$q_number = 1;
+        $this->denyAccessUnlessGranted('ROLE_USER');        
+        //DENYING ACCESS
 
         //Showing the specific question outside the form
         $questions = $this->getDoctrine()
@@ -38,25 +38,23 @@ class QuizController extends AbstractController
         $question_number = $this->getDoctrine()
             ->getRepository(Question::class)
             ->findOneBy(['quiz' => $quiz_id, 'id' => $question_id]);
-        dump($question_number->getQNumber());
+        //dump($question_number->getQNumber());
 
         //Putting QuizID & QuestionID in the SESSION
         $session->set('quiz_id', $quiz_id);
         $session->set('question_id', $question_id);
-
-        //Creating form
+        //Creating the form
         $form = $this->createForm(QuizFormType::class);
 
         //Form submission
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $data['quiztype'] = 'ASS';
-
             $userAnswer = new UserAnswer();
 
-            $userAnswer->setUser($this->getUser());          // ^^ Extras automat 
-            $userAnswer->setQuiz($data['quiz']);             // specificate cu GET gen, "quizz_{id}/question_{nbr}"
+            $userAnswer->setUser($this->getUser());          
+            // ^^ Extras automat 
+            $userAnswer->setQuiz($data['quiz']);             
             $userAnswer->setQuestion($data['question']);
             $userAnswer->setAnswer($data['answer']);
             $userAnswer->setQuizType($data['quiztype']);

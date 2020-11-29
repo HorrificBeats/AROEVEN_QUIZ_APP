@@ -27,7 +27,7 @@ class ModuleController extends AbstractController
         ]);
     }
 
-    // Shows one module
+    // Load Slides from one Module
     /**
      * @Route("/module/{id}", name="module")
      */

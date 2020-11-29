@@ -56,9 +56,7 @@ class RegistrationFormType extends AbstractType
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ],
                 'format' => 'dd MM yyyy'
-            ] 
-            )
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

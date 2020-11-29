@@ -1,121 +1,115 @@
 {% extends 'base.html.twig' %}
-
 {% block title %} ADMIN {% endblock %}
-
 {% block body %}
 		
-	{# RESULTS TABLE #}
-		{% if app.request.attributes.get('_route') == 'admin_results' %}
-			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'> 
-				<table id="table_id" datatables='' class="display p-1 bg-white responsive w-100">
-
-					{# Custom tag for Datables #}
-					<thead>
-						{# Priority for dissapearing columns; 
-						biggest number dissapears first #}
-						<th> UserAnswerID</th>
-						<th data-priority="1">USER</th>	
-						<th data-priority="4">q.number</th>
-						<th data-priority="2">QUESTION</th>
-						<th data-priority="5">answ.nb</th>
-						<th data-priority="3">ANSWER</th>
-					</thead>
-
-					{# Custom tag for Datables #}
-					<tbody>
-						{% for usr_answ in userAnswer %}
-							<tr class='resultsAll'>
-								<td class='text-center'>
-									<b>{{usr_answ}}</b>
-								</td>
-								<td class='text-center'>
-									<b>{{usr_answ.user.username}}</b>
-								</td>
-								<td class='text-center'>{{usr_answ.question.qnumber}}</td>
-								<td>{{usr_answ.question.content}}</td>
-								<td class='text-center'>{{usr_answ.answer.answernumber}}</td>
-								<td>{{usr_answ.answer.content}}</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		{% endif %}
+{# RESULTS TABLE #}
+	{% if app.request.attributes.get('_route') == 'admin_results' %}
+		<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'> 
+			<table id="table_id" datatables='' class="display p-1 bg-white responsive w-100">
+				<thead> {# Custom tag for DataTables #}
+					<th> UserAnswerID</th> 
+					{# Priority for dissapearing columns; 
+					biggest number dissapears first #}
+					<th data-priority="1">USER</th>	
+					<th data-priority="4">q.number</th>
+					<th data-priority="2">QUESTION</th>
+					<th data-priority="5">answ.nb</th>
+					<th data-priority="3">ANSWER</th>
+				</thead>
+				<tbody> {# Custom tag for DataTables #}
+					{% for usr_answ in userAnswer %}
+						<tr class='resultsAll'>
+							<td class='text-center'>
+								<b>{{usr_answ}}</b>
+							</td>
+							<td class='text-center'>
+								<b>{{usr_answ.user.username}}</b>
+							</td>
+							<td class='text-center'>{{usr_answ.question.qnumber}}</td>
+							<td>{{usr_answ.question.content}}</td>
+							<td class='text-center'>{{usr_answ.answer.answernumber}}</td>
+							<td>{{usr_answ.answer.content}}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
 
 {# MODULES TABLE #}
-		{% if app.request.attributes.get('_route') ==  'admin_modules' %}
-			<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'>
-				<table id="table_id" datatables='' class="display p-1 responsive wrap bg-white w-100">
+	{% if app.request.attributes.get('_route') ==  'admin_modules' %}
+		<div class='container responsive rounded mt-5 pt-3 col-lg-10 bg-white hoverable'>
+			<table id="table_id" datatables='' class="display p-1 responsive wrap bg-white w-100">
 
-					{# Custom tag for Datables #}
-					<thead>
-						<tr class='modulesAll'>
-							<th data-priority="1">MODULES</th>
-							<th data-priority="1">N.S.</th>
-							<th data-priority="1">Slides</th>
-							<th data-priority="5">Content Type</th>
+				{# Custom tag for Datables #}
+				<thead>
+					<tr class='modulesAll'>
+						<th data-priority="1">MODULES</th>
+						<th data-priority="1">N.S.</th>
+						<th data-priority="1">Slides</th>
+						<th data-priority="5">Content Type</th>
+					</tr>
+				</thead>
+
+				{# Custom tag for Datables #}
+				<tbody>
+					{# Going through SLIDES to get to MODULES #}
+					{% for slide in slides %}
+
+						<tr>
+							<td>{{slide.getIdModule.title}}</td>
+							<td>{{slide.getSlideNumber}}</td>
+							<td class='text-justify'>{{slide.content|e}}</td>
+							<td>
+								<i>{{slide.getContentType}}</i>
+							</td>
 						</tr>
-					</thead>
-
-					{# Custom tag for Datables #}
-					<tbody>
-						{# Going through SLIDES to get to MODULES #}
-						{% for slide in slides %}
-
-							<tr>
-								<td>{{slide.getIdModule.title}}</td>
-								<td>{{slide.getSlideNumber}}</td>
-								<td class='text-justify'>{{slide.content|e}}</td>
-								<td>
-									<i>{{slide.getContentType}}</i>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
 
 {# QUIZZEZ TABLE #}
-		{% if app.request.attributes.get('_route') == 'admin_quizzes' %}
-			<div class='container responsive rounded mt-5 pt-3 col-lg-10 hoverable bg-white'>
-				<table id="table_id" datatables='' class="display p-1 responsive wrap w-100">
-					
-					{# Custom tag for Datables #}
-					<thead>
-						<tr>
-							<th data-priority="3">Quiz id</th>
-							<th data-priority="4">Q_N</th>
-							<th data-priority="1">Question</th>
-							<th data-priority="5">Answer Number</th>
-							<th data-priority="2">Answer</th>
-							<th data-priority="6">Edit</th>
-							<th data-priority="7">Delete</th>
-						</tr>
-					</thead>
-					
-					{# Custom tag for Datables #}
-					<tbody>
-						{% for answer in answers %}
-							<tr class='quizzesAll'>
-								<td>
-									<b>{{answer.getQuestion.getQuiz.id}}</b>
-								</td>
-								<td>{{answer.getQuestion.getQNumber}}</td>
-								<td>{{answer.getQuestion.content}}</td>
-								<td>{{answer.getAnswerNumber}}</td>
+	{% if app.request.attributes.get('_route') == 'admin_quizzes' %}
+		<div class='container responsive rounded mt-5 pt-3 col-lg-10 hoverable bg-white'>
+			<table id="table_id" datatables='' class="display p-1 responsive wrap w-100">
+				
+				{# Custom tag for Datables #}
+				<thead>
+					<tr>
+						<th data-priority="3">Quiz id</th>
+						<th data-priority="4">Q_N</th>
+						<th data-priority="1">Question</th>
+						<th data-priority="5">Answer Number</th>
+						<th data-priority="2">Answer</th>
+						<th data-priority="6">Edit</th>
+						<th data-priority="7">Delete</th>
+					</tr>
+				</thead>
+				
+				{# Custom tag for Datables #}
+				<tbody>
+					{% for answer in answers %}
+						<tr class='quizzesAll'>
+							<td>
+								<b>{{answer.getQuestion.getQuiz.id}}</b>
+							</td>
+							<td>{{answer.getQuestion.getQNumber}}</td>
+							<td>{{answer.getQuestion.content}}</td>
+							<td>{{answer.getAnswerNumber}}</td>
 
-								<td>{{answer.content}}</td>
-								<td>
-									<a href='#'>🖋</a>
-								</td>
-								<td>
-									<a href='#'>🗑</a>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		{% endif %}
+							<td>{{answer.content}}</td>
+							<td>
+								<a href='#'>🖋</a>
+							</td>
+							<td>
+								<a href='#'>🗑</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% endif %}
 {% endblock %}
