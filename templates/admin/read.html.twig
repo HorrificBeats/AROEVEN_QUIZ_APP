@@ -10,7 +10,8 @@
 					<th> UserAnswerID</th> 
 					{# Priority for dissapearing columns; 
 					biggest number dissapears first #}
-					<th data-priority="1">USER</th>	
+					<th data-priority="1">USER</th>
+					<th data-priority="6">AGE</th>
 					<th data-priority="4">q.number</th>
 					<th data-priority="2">QUESTION</th>
 					<th data-priority="5">answ.nb</th>
@@ -24,6 +25,9 @@
 							</td>
 							<td class='text-center'>
 								<b>{{usr_answ.user.username}}</b>
+							</td>
+							<td class='text-center'>
+								<b>{{usr_answ.user.age}}</b>
 							</td>
 							<td class='text-center'>{{usr_answ.question.qnumber}}</td>
 							<td>{{usr_answ.question.content}}</td>

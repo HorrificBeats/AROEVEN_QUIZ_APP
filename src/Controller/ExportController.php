@@ -47,6 +47,7 @@ class ExportController extends AbstractController
     public function export()
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        date_default_timezone_set('Europe/Berlin');
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();

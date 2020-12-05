@@ -13,7 +13,7 @@
 			<div id='ModuleA' class=' rounded animated fadeIn'>
 				{% for slide in slides %}
 					{# For the 1st Slide to be visible, modify 'slide.id' #}
-					<div {# id='slide{{slide.id}}' #} class='slide p-3 ' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
+					<div id='slide{{slide.id}}' class='slide p-3 ' {{ slide.id == 1 ? 'style="display:"' : 'style="display:none"' }}>
 						<h5 class='mb-3 text-center'>
 							<b>- {{slide.getSlideNumber}} -</b>
 						</h5>

@@ -17,23 +17,23 @@ function showSlide(elementID) {
   //Adds 'd:block' one-by-one to each slide
   elem.style.display = "block";
 
-// 1st Slide Timed Button Hidding
-window.onload = function () {
-  setTimeout(function () {
-    $(".NextSlideTimer").removeClass("invisible");
-    $(".NextSlideTimer").addClass("animate__flipInX");
-  }, 500);
-}
+
 
   // Timed-hidding of NextSlide Button (ignores the 1st slide)
   $(".NextSlideTimer").removeClass("animate__flipInX");
   $(".NextSlideTimer").addClass("invisible");
-  setTimeout(function () {
-    $(".NextSlideTimer").removeClass("invisible");
-    $(".NextSlideTimer").addClass("animate__flipInX");
-  }, 500);
+ setTimeout(function () {
+   $(".NextSlideTimer").removeClass("invisible");
+   $(".NextSlideTimer").addClass("animate__flipInX");
+ }, 500);
 }
-
+// 1st Slide Timed Button Hidding
+window.onload = function () {
+ setTimeout(function () {
+   $(".NextSlideTimer").removeClass("invisible");
+   $(".NextSlideTimer").addClass("animate__flipInX");
+ }, 500);
+};
 
 
 
